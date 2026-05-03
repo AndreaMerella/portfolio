@@ -15,15 +15,26 @@
             --font-main: 'Bungee', cursive; --font-sub: 'Space Mono', monospace;
         }
 
+        html, body {
+            overscroll-behavior-x: none;
+            overscroll-behavior-y: auto;
+        }
+
         body {
             background-color: var(--bg-color); color: var(--text-color);
             transition: background-color 0.8s ease, color 0.8s ease;
             overflow-x: hidden; margin: 0; position: relative; cursor: none;
             -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+            width: 100vw;
         }
         
         img, video { pointer-events: none; -webkit-user-drag: none; }
-        @media (pointer: coarse) { body { cursor: auto; } #custom-cursor, .cursor-trail { display: none !important; } }
+        
+        /* HARD KILL CUSTOM CURSOR ON MOBILE/TOUCH DEvices */
+        @media (pointer: coarse), (hover: none) { 
+            body, a, button, .project-block, .loud-highlight, .tech-highlight { cursor: auto !important; } 
+            #custom-cursor, .cursor-trail { display: none !important; opacity: 0 !important; visibility: hidden !important; } 
+        }
 
         /* === IGNITION SEQUENCE === */
         body.standby { background-color: #050505 !important; color: #f4f4f0 !important; overflow: hidden; height: 100dvh; }
@@ -53,7 +64,7 @@
         body:not(.standby) .ui-panel { transition: opacity 1.2s 0.8s, transform 1.2s 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) #interactive-grid { transition: opacity 2s 1s; }
 
-        /* === GRID & CURSOR (GPU Accelerated for Zero Lag) === */
+        /* === GRID & CURSOR === */
         #interactive-grid { position: fixed; inset: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); grid-template-rows: repeat(auto-fill, minmax(50px, 1fr)); pointer-events: none; z-index: 0; transition: opacity 0.5s ease; }
         .grid-cell { border: 0.5px solid rgba(0,0,0,0.04); transition: background-color 0.8s ease; pointer-events: auto; }
         .grid-cell.active { transition: 0s; }
@@ -116,7 +127,6 @@
         body.mode-tech { --bg-color: #030805; --text-color: #00ff41; background-color: #000; background-image: radial-gradient(rgba(0,255,65,0.15) 1px, transparent 1px); background-size: 20px 20px; }
         .mode-tech #interactive-grid { display: none; } 
         
-        /* New Glitch to Pulse Sequence */
         @keyframes tech-zap {
             0%, 100% { text-shadow: 0 0 2px #fff, 0 0 8px #00ff41; transform: skewX(0deg); color: #fff; }
             20% { text-shadow: 3px 0 5px #fff, -3px 0 15px #00ff41; transform: skewX(-8deg); color: #00ff41; }
@@ -132,14 +142,21 @@
         
         .mode-tech .loud-highlight:hover, .mode-tech .tech-highlight:hover { 
             animation: tech-zap 0.1s 4 forwards, tech-pulse 3s 0.4s infinite alternate ease-in-out; 
-            background: transparent; 
-            border: none; 
-            padding: 0 1rem; 
+            background: transparent; border: none; padding: 0 1rem; 
         }
 
-        .mode-tech #custom-cursor { background: #00ff41; border: none; mix-blend-mode: normal; box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41; }
-        .mode-tech #custom-cursor.hovering { transform: scale(1.6) !important; background: #fff; box-shadow: 0 0 20px #fff, 0 0 40px #00ff41; }
-        .mode-tech .cursor-trail { background: rgba(0,255,65,0.8); border: none; mix-blend-mode: normal; box-shadow: 0 0 8px #00ff41, 0 0 15px #00ff41; }
+        .mode-tech #custom-cursor { 
+            background: #00ff41; border: none; mix-blend-mode: normal; 
+            box-shadow: 0 0 15px #00ff41, 0 0 30px #00ff41, 0 0 45px rgba(0,255,65,0.6); 
+        }
+        .mode-tech #custom-cursor.hovering { 
+            transform: scale(1.6) !important; background: #fff; 
+            box-shadow: 0 0 20px #fff, 0 0 40px #00ff41, 0 0 60px #00ff41; 
+        }
+        .mode-tech .cursor-trail { 
+            background: rgba(0,255,65,0.9); border: none; mix-blend-mode: normal; 
+            box-shadow: 0 0 10px #00ff41, 0 0 20px rgba(0,255,65,0.5); 
+        }
         
         .mode-tech .project-block { border: 1px solid #00ff41; background: #000; box-shadow: 0 0 15px rgba(0,255,65,0.05); overflow: hidden; }
         .mode-tech .project-block:hover { transform: translate(0); box-shadow: 0 0 25px rgba(0,255,65,0.4); z-index: 20; }
@@ -183,7 +200,7 @@
         .mode-sleek .project-block:hover .img-fit { filter: brightness(1) saturate(1); transform: scale(1.02); }
 
         /* === GRID ARCHITECTURE === */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3.5rem 2.5rem; padding: 0 4rem 24rem 4rem; max-width: 1800px; margin: 0 auto; position: relative; z-index: 10; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3.5rem 2.5rem; padding: 0 4rem 18rem 4rem; max-width: 1800px; margin: 0 auto; position: relative; z-index: 10; }
         .project-block { display: flex; flex-direction: column; position: relative; }
         .img-wrap { height: 260px; position: relative; width: 100%; overflow: hidden; cursor: crosshair; }
         .media-target { width: 100%; height: 100%; }
@@ -245,6 +262,29 @@
         .close-btn:hover { opacity: 0.5; transform: scale(1.2); }
 
         a, button, .audio-header, #build-sticker, input, textarea, .project-block, .play-btn, .loud-highlight, .tech-highlight, .icon-link { cursor: none; }
+
+        /* === MOBILE RESPONSIVE UNTANGLER === */
+        @media (max-width: 768px) {
+            .ui-panel { top: 1rem; right: 1rem; left: 1rem; justify-content: center; transform: scale(0.9); transform-origin: top center; z-index: 9000; }
+            #audio-hub { bottom: 1rem; left: 1rem; right: 1rem; }
+            .audio-card { max-width: 100%; padding: 0.5rem; }
+            .audio-accordion.open { padding-left: 0.5rem; }
+            
+            /* Lift the sticker safely out of the way of the bottom bar */
+            #build-sticker { bottom: 6.5rem; right: 1.5rem; font-size: 10px; padding: 0.75rem 1rem; transform: rotate(-2deg); }
+            
+            .project-grid { padding: 0 1.5rem 10rem 1.5rem; gap: 2.5rem; grid-template-columns: 1fr; }
+            section { padding-top: 8rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+            h1 { font-size: 3rem; line-height: 1; }
+            
+            .audio-accordion .flex.items-center.gap-4 { min-w: auto; flex-wrap: wrap; justify-content: space-between; }
+        }
+
+        @media (max-width: 480px) {
+            #build-sticker { bottom: 7.5rem; } 
+            .icon-link { display: none; } 
+            .audio-accordion .border-l { border: none !important; padding-left: 0 !important; }
+        }
     </style>
 </head>
 <body class="mode-loud standby" id="portfolio-body">
@@ -450,7 +490,9 @@
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let fxMuted = false;
-        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        
+        // Touch Detection
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.matchMedia("(pointer: coarse)").matches);
 
         function toggleFX() {
             fxMuted = !fxMuted;
@@ -461,17 +503,35 @@
         
         function playSoothingBootSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0.4; 
+            masterGain.connect(audioCtx.destination);
+
+            const t = audioCtx.currentTime;
+
             [130.81, 196.00, 293.66, 329.63].forEach((f, index) => {
-                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); const filter = audioCtx.createBiquadFilter();
+                const osc = audioCtx.createOscillator(); 
+                const gain = audioCtx.createGain(); 
+                const filter = audioCtx.createBiquadFilter();
+                
                 osc.type = 'sine'; osc.frequency.value = f;
-                filter.type = 'lowpass'; filter.frequency.setValueAtTime(400, audioCtx.currentTime); filter.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 2);
-                gain.gain.setValueAtTime(0, audioCtx.currentTime); gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5 + (index * 0.2)); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5 + (index * 0.5)); 
-                osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
-                osc.start(); osc.stop(audioCtx.currentTime + 6);
+                
+                filter.type = 'lowpass'; 
+                filter.frequency.setValueAtTime(400, t); 
+                filter.frequency.exponentialRampToValueAtTime(1200, t + 2);
+                
+                gain.gain.setValueAtTime(0, t); 
+                gain.gain.linearRampToValueAtTime(0.06, t + 1.5 + (index * 0.2)); 
+                gain.gain.exponentialRampToValueAtTime(0.0001, t + 6.5);
+                gain.gain.linearRampToValueAtTime(0, t + 6.8); 
+                
+                osc.connect(filter); filter.connect(gain); gain.connect(masterGain);
+                osc.start(t); 
+                osc.stop(t + 7); 
             });
         }
 
-        // Fast LFO Wobble (Now assigned to Logo)
         function playTechLogoWobble() {
             const t = audioCtx.currentTime;
             const osc = audioCtx.createOscillator(); const filter = audioCtx.createBiquadFilter(); const gain = audioCtx.createGain();
@@ -526,7 +586,6 @@
             }
         });
 
-        // === GRID ===
         const grid = document.getElementById('interactive-grid');
         for (let i = 0; i < 400; i++) { const cell = document.createElement('div'); cell.className = 'grid-cell'; grid.appendChild(cell); }
         if (!isTouch) {
@@ -537,10 +596,11 @@
             });
         }
 
-        // === ZERO-LAG GPU CURSOR ===
         const cursor = document.getElementById('custom-cursor');
         const trails = [document.getElementById('trail-1'), document.getElementById('trail-2')];
         let mX = -100, mY = -100, tX = [-100, -100], tY = [-100, -100];
+        
+        // ONLY init pointer-tracking logic if we are strictly NOT on a touch screen.
         if (!isTouch) {
             document.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; });
             function animateCursor() {
@@ -550,6 +610,7 @@
                 requestAnimationFrame(animateCursor);
             }
             animateCursor();
+            
             const interactables = document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn), .audio-header, .project-block');
             interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
@@ -560,7 +621,6 @@
         function toggleAudio(id) { document.getElementById('panel-' + id).classList.toggle('open'); }
         function toggleForm() { document.getElementById('contact-modal').classList.toggle('active'); }
 
-        // === WARM, COMFY HARMONICS + ZERO DISTORTION TRANSIENT ===
         const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
         let nIdx = 0, dir = 1;
 
@@ -590,13 +650,12 @@
                 const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(f * 1.5, t); 
                 gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.02, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
                 
-                // Metallic Multitap Delay Network
                 const delay = audioCtx.createDelay(); delay.delayTime.value = 0.05; 
                 const fb = audioCtx.createGain(); fb.gain.value = 0.35;
                 delay.connect(fb); fb.connect(delay); delay.connect(audioCtx.destination);
 
                 osc.connect(filter); filter.connect(gain); 
-                gain.connect(audioCtx.destination); gain.connect(delay); // Route to delay
+                gain.connect(audioCtx.destination); gain.connect(delay);
                 
                 osc.start(t); osc.stop(t + 0.45);
             } else {
@@ -605,8 +664,6 @@
                 gain.connect(audioCtx.destination);
             }
         }
-
-        // --- SPECIFIC TEXT HOVER SYNTHS ---
         
         function playLoudBoing() {
             const t = audioCtx.currentTime;
@@ -624,7 +681,6 @@
             osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.35);
         }
 
-        // Deep Sub Wobble (Now assigned to Sound)
         function playTechSoundWobble() {
             const t = audioCtx.currentTime;
             const osc = audioCtx.createOscillator(); const filter = audioCtx.createBiquadFilter(); const gain = audioCtx.createGain();
@@ -665,30 +721,37 @@
             });
         }
 
-        // Music Player Dock Custom Hover Reveal Sound
+        // Calming, brief "Nudge" for Music Player Hover
         function playPlayerHoverSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             if (fxMuted || document.body.classList.contains('standby')) return;
             const t = audioCtx.currentTime;
 
-            // Transiet Pop
-            const snapOsc = audioCtx.createOscillator(); const snapGain = audioCtx.createGain();
-            snapOsc.type = 'sine'; snapOsc.frequency.setValueAtTime(800, t); snapOsc.frequency.exponentialRampToValueAtTime(400, t + 0.05);
-            snapGain.gain.setValueAtTime(0, t); snapGain.gain.linearRampToValueAtTime(0.1, t + 0.01); snapGain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
-            snapOsc.connect(snapGain); snapGain.connect(audioCtx.destination); snapOsc.start(t); snapOsc.stop(t + 0.15);
+            const gain = audioCtx.createGain();
+            
+            // Very slow attack, very gentle release, brief total duration
+            gain.gain.setValueAtTime(0, t);
+            gain.gain.linearRampToValueAtTime(0.1, t + 0.15); 
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.7); 
 
-            // Calming Ascending Arpeggio
-            [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
-                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-                osc.type = 'sine'; osc.frequency.value = f;
-                const startTime = t + (i * 0.06);
-                gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(0.05, startTime + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.0);
-                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(startTime); osc.stop(startTime + 1.1);
+            // Soft pure sine waves for a relaxing interval (C4 and G4)
+            [261.63, 392.00].forEach(f => {
+                const osc = audioCtx.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.value = f;
+                osc.connect(gain);
+                osc.start(t);
+                osc.stop(t + 0.75);
             });
-        }
-        document.querySelector('.audio-card').addEventListener('mouseenter', playPlayerHoverSound);
 
-        // --- MASTER HIGHLIGHT ROUTING ---
+            gain.connect(audioCtx.destination);
+        }
+        
+        // Bind hover for desktop, touch for mobile
+        const audioDock = document.querySelector('.audio-card');
+        audioDock.addEventListener('mouseenter', playPlayerHoverSound);
+        audioDock.addEventListener('touchstart', playPlayerHoverSound, {passive: true});
+
         function triggerHighlightLogic(targetStr) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             
@@ -707,16 +770,21 @@
             } else if (mode.includes('mode-sleek')) {
                 if (targetStr === 'sound') playSleekCrystal();
                 else playSleekPluck();
-            } else { // Loud
+            } else { 
                 if (targetStr === 'sound') playLoudBoing();
                 else playLoudPing();
             }
         }
 
-        document.querySelector('.loud-highlight').addEventListener('mouseenter', () => triggerHighlightLogic('sound'));
-        document.querySelector('.tech-highlight').addEventListener('mouseenter', () => triggerHighlightLogic('systems'));
+        const soundWord = document.querySelector('.loud-highlight');
+        const systemWord = document.querySelector('.tech-highlight');
+        
+        soundWord.addEventListener('mouseenter', () => triggerHighlightLogic('sound'));
+        soundWord.addEventListener('touchstart', () => triggerHighlightLogic('sound'), {passive: true});
+        
+        systemWord.addEventListener('mouseenter', () => triggerHighlightLogic('systems'));
+        systemWord.addEventListener('touchstart', () => triggerHighlightLogic('systems'), {passive: true});
 
-        // Bespoke Sticker Sounds
         function playStickerSound() {
             if (document.body.classList.contains('standby') || fxMuted) return; 
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -741,6 +809,10 @@
                 });
             }
         }
+        
+        const stickerNode = document.getElementById('build-sticker');
+        stickerNode.addEventListener('mouseenter', playStickerSound);
+        stickerNode.addEventListener('touchstart', playStickerSound, {passive: true});
 
         function playModeSwitchSound(modeClass) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -767,7 +839,10 @@
             }
         }
 
-        document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn):not(.mode-btn):not(#build-sticker), .audio-header, .project-block').forEach(n => n.addEventListener('mouseenter', playSound));
+        document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn):not(.mode-btn):not(#build-sticker), .audio-header, .project-block').forEach(n => {
+            n.addEventListener('mouseenter', playSound);
+            n.addEventListener('touchstart', playSound, {passive: true});
+        });
 
         function setMode(cls, btn) {
             if(document.body.className.includes(cls)) return; 
@@ -779,7 +854,6 @@
             playModeSwitchSound(cls);
         }
 
-        // === MULTI-TRACK AUDIO PLAYER ===
         const nativeAudio = document.getElementById('native-audio');
         const playBtn = document.getElementById('custom-play-btn');
         const progContainer = document.getElementById('custom-progress-container');
@@ -826,7 +900,6 @@
             const rect = progContainer.getBoundingClientRect(); nativeAudio.currentTime = ((e.clientX - rect.left) / rect.width) * nativeAudio.duration;
         });
 
-        // === COMMAND CENTER ===
         let isListening = false; let micStream = null; let clapThreshold = 0.35; let speechRecog = null;
 
         async function toggleVoiceAndClap() {
