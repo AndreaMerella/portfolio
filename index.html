@@ -654,13 +654,8 @@
                 const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(f * 1.5, t); 
                 gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.02, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
                 
-                // EXCLUSIVE TECH DELAY EFFECT
-                const delay = audioCtx.createDelay(); delay.delayTime.value = 0.05; 
-                const fb = audioCtx.createGain(); fb.gain.value = 0.35;
-                delay.connect(fb); fb.connect(delay); delay.connect(audioCtx.destination);
-
                 osc.connect(filter); filter.connect(gain); 
-                gain.connect(audioCtx.destination); gain.connect(delay);
+                gain.connect(audioCtx.destination);
                 
                 osc.start(t); osc.stop(t + 0.45);
             } else {
