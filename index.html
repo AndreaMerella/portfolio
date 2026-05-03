@@ -266,15 +266,20 @@
         /* === MOBILE RESPONSIVE UNTANGLER === */
         @media (max-width: 768px) {
             .ui-panel { top: 1rem; right: 1rem; left: 1rem; justify-content: center; transform: scale(0.9); transform-origin: top center; z-index: 9000; }
+            
+            /* Push the AM. logo down so it does not collide with the UI panel */
+            body:not(.standby) #boot-trigger { top: 5rem !important; left: 1.5rem !important; }
+            
             #audio-hub { bottom: 1rem; left: 1rem; right: 1rem; }
             .audio-card { max-width: 100%; padding: 0.5rem; }
             .audio-accordion.open { padding-left: 0.5rem; }
             
-            /* Lift the sticker safely out of the way of the bottom bar */
             #build-sticker { bottom: 6.5rem; right: 1.5rem; font-size: 10px; padding: 0.75rem 1rem; transform: rotate(-2deg); }
             
             .project-grid { padding: 0 1.5rem 10rem 1.5rem; gap: 2.5rem; grid-template-columns: 1fr; }
-            section { padding-top: 8rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+            
+            /* Added padding-top to keep the text block clear of the lowered AM. logo */
+            section { padding-top: 10rem; padding-left: 1.5rem; padding-right: 1.5rem; }
             h1 { font-size: 3rem; line-height: 1; }
             
             .audio-accordion .flex.items-center.gap-4 { min-w: auto; flex-wrap: wrap; justify-content: space-between; }
@@ -551,15 +556,14 @@
             } else if (mode.includes('mode-loud')) {
                 const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
                 osc.type = 'sine'; osc.frequency.setValueAtTime(440, t); osc.frequency.exponentialRampToValueAtTime(880, t + 0.1); 
-                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.3, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.3, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
                 osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.35);
             } else if (mode.includes('mode-sleek')) {
-                [1046.50, 1318.51, 1567.98, 2093.00].forEach((f, i) => {
+                [1046.50, 1318.51, 1567.98, 2093.00].forEach((f) => {
                     const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
                     osc.type = 'sine'; osc.frequency.value = f;
-                    const delay = i * 0.08; 
-                    gain.gain.setValueAtTime(0, t + delay); gain.gain.linearRampToValueAtTime(0.05, t + delay + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + delay + 1.5); 
-                    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t + delay); osc.stop(t + delay + 1.6);
+                    gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.05, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 1.5); 
+                    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 1.6);
                 });
             }
         }
@@ -642,7 +646,7 @@
             if (mode.includes('mode-loud')) {
                 const osc = audioCtx.createOscillator(); osc.type = 'triangle'; osc.frequency.setValueAtTime(f, t);
                 const sub = audioCtx.createOscillator(); sub.type = 'sine'; sub.frequency.setValueAtTime(f / 2, t);
-                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.06, t + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6); 
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.06, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6); 
                 osc.connect(gain); sub.connect(gain); gain.connect(audioCtx.destination); 
                 osc.start(t); sub.start(t); osc.stop(t + 0.65); sub.stop(t + 0.65);
             } else if (mode.includes('mode-tech')) {
@@ -650,6 +654,7 @@
                 const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(f * 1.5, t); 
                 gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.02, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
                 
+                // EXCLUSIVE TECH DELAY EFFECT
                 const delay = audioCtx.createDelay(); delay.delayTime.value = 0.05; 
                 const fb = audioCtx.createGain(); fb.gain.value = 0.35;
                 delay.connect(fb); fb.connect(delay); delay.connect(audioCtx.destination);
@@ -659,7 +664,7 @@
                 
                 osc.start(t); osc.stop(t + 0.45);
             } else {
-                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.03, t + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + 1.2);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.03, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 1.2);
                 [1, 1.5, 2].forEach(m => { const osc = audioCtx.createOscillator(); osc.type = 'sine'; osc.frequency.value = f * m; osc.connect(gain); osc.start(t); osc.stop(t + 1.2); });
                 gain.connect(audioCtx.destination);
             }
@@ -669,7 +674,7 @@
             const t = audioCtx.currentTime;
             const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
             osc.type = 'sine'; osc.frequency.setValueAtTime(150, t); osc.frequency.exponentialRampToValueAtTime(600, t + 0.15); 
-            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.4, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
+            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.4, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
             osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.45);
         }
 
@@ -703,17 +708,17 @@
 
         function playSleekCrystal() {
             const t = audioCtx.currentTime;
-            [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => { 
+            [523.25, 659.25, 783.99, 1046.50].forEach((f) => { 
                 const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
                 osc.type = 'sine'; osc.frequency.value = f;
-                gain.gain.setValueAtTime(0, t + (i * 0.05)); gain.gain.linearRampToValueAtTime(0.04, t + (i * 0.05) + 0.1); gain.gain.exponentialRampToValueAtTime(0.001, t + (i * 0.05) + 2.0); 
-                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t + (i * 0.05)); osc.stop(t + (i * 0.05) + 2.1);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.04, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 2.0); 
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 2.1);
             });
         }
 
         function playSleekPluck() {
             const t = audioCtx.currentTime;
-            [880, 1318.51].forEach((f, i) => { 
+            [880, 1318.51].forEach((f) => { 
                 const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
                 osc.type = 'sine'; osc.frequency.value = f;
                 gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.08, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
@@ -801,11 +806,11 @@
                 gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.05, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
                 osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.15);
             } else {
-                [1046.50 * 2, 1318.51 * 2].forEach((f, i) => { 
+                [1046.50 * 2, 1318.51 * 2].forEach((f) => { 
                     const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
                     osc.type = 'sine'; osc.frequency.value = f;
-                    gain.gain.setValueAtTime(0, t + (i*0.05)); gain.gain.linearRampToValueAtTime(0.05, t + (i*0.05) + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + (i*0.05) + 1.0);
-                    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t + (i*0.05)); osc.stop(t + (i*0.05) + 1.1);
+                    gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.05, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 1.0);
+                    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 1.1);
                 });
             }
         }
@@ -824,7 +829,7 @@
 
             if (modeClass === 'mode-loud') {
                 osc.type = 'triangle'; osc.frequency.setValueAtTime(120, t); osc.frequency.exponentialRampToValueAtTime(50, t + 0.3); 
-                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.2, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.2, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
                 osc.connect(gain); osc.start(t); osc.stop(t + 0.4);
             } else if (modeClass === 'mode-tech') {
                 osc.type = 'square'; const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass';
@@ -834,7 +839,7 @@
                 osc.connect(filter); filter.connect(gain); osc.start(t); osc.stop(t + 0.35);
             } else if (modeClass === 'mode-sleek') {
                 osc.type = 'sine'; osc.frequency.setValueAtTime(880, t); osc.frequency.linearRampToValueAtTime(1760, t + 0.4);
-                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.1, t + 0.2); gain.gain.linearRampToValueAtTime(0.001, t + 0.6);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.1, t + 0.01); gain.gain.linearRampToValueAtTime(0.001, t + 0.6);
                 osc.connect(gain); osc.start(t); osc.stop(t + 0.65);
             }
         }
