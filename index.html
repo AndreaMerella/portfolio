@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ANDREA MERELLA // PORTFOLIO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&display=swap" rel="stylesheet">
@@ -19,292 +19,238 @@
             background-color: var(--bg-color); color: var(--text-color);
             transition: background-color 0.8s ease, color 0.8s ease;
             overflow-x: hidden; margin: 0; position: relative; cursor: none;
+            -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
         }
         
-        @media (pointer: coarse) { body { cursor: auto; } #custom-cursor, .cursor-trail { display: none; } }
+        img, video { pointer-events: none; -webkit-user-drag: none; }
+        @media (pointer: coarse) { body { cursor: auto; } #custom-cursor, .cursor-trail { display: none !important; } }
 
-        /* === IGNITION SEQUENCE (STANDBY MODE) === */
-        body.standby { background-color: #050505 !important; color: #f4f4f0 !important; overflow: hidden; }
-        
-        body.standby #boot-trigger { 
-            top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2); cursor: crosshair; 
+        /* === IGNITION SEQUENCE === */
+        body.standby { background-color: #050505 !important; color: #f4f4f0 !important; overflow: hidden; height: 100dvh; }
+        #boot-trigger { 
+            position: absolute; z-index: 99999; top: 3rem; left: 3rem; transform: scale(1);
+            transition: top 1.5s cubic-bezier(0.85, 0, 0.15, 1), left 1.5s cubic-bezier(0.85, 0, 0.15, 1); 
+            cursor: crosshair; display: inline-block;
         }
+        body.standby #boot-trigger { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2.2); }
         body.standby #boot-trigger .loud-dot { color: #f4f4f0; } 
         body.standby #boot-trigger .copyright-text { opacity: 0; }
         
-        @keyframes pulse-standby {
-            0% { opacity: 0.6; text-shadow: 0 0 10px rgba(255,255,255,0); }
-            50% { opacity: 1; text-shadow: 0 0 30px rgba(255,255,255,0.3); }
-            100% { opacity: 0.6; text-shadow: 0 0 10px rgba(255,255,255,0); }
-        }
-        body.standby #boot-trigger .logo-text { animation: pulse-standby 4s infinite ease-in-out; }
+        @keyframes pixar-drop { 0% { transform: translateY(-300px) scaleY(1.5) scaleX(0.8); opacity: 0; } 60% { transform: translateY(20px) scaleY(0.7) scaleX(1.3); opacity: 1; } 80% { transform: translateY(-15px) scaleY(1.1) scaleX(0.9); } 100% { transform: translateY(0) scaleY(1) scaleX(1); } }
+        @keyframes mtv-smash { 0% { transform: scale(1) rotate(0deg); } 20% { transform: scale(1.4) rotate(-15deg); } 40% { transform: scale(0.8) rotate(20deg); } 60% { transform: scale(1.2) rotate(-5deg); } 100% { transform: scale(1) rotate(0deg); } }
+        @keyframes tech-shake { 0%, 100% { transform: translate(0, 0) skewX(0); } 20%, 60% { transform: translate(-4px, 3px) skewX(8deg); } 40%, 80% { transform: translate(4px, -3px) skewX(-8deg); } }
+        @keyframes sleek-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* Hide UI Elements during standby */
-        body.standby section, body.standby main, body.standby #audio-hub, 
-        body.standby .ui-panel, body.standby .social-dock, body.standby #build-sticker {
-            opacity: 0; pointer-events: none; transform: translateY(40px);
-        }
-        body.standby #interactive-grid, body.standby .scanlines { opacity: 0; pointer-events: none; }
+        .logo-text { display: inline-block; transform-origin: center; transition: color 0.3s; }
+        body.standby .logo-text { animation: pixar-drop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important; }
 
-        /* Staggered Reveal Cascade */
-        #boot-trigger { transition: top 1.5s cubic-bezier(0.19, 1, 0.22, 1), left 1.5s cubic-bezier(0.19, 1, 0.22, 1), transform 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
+        body.standby section, body.standby main, body.standby #audio-hub, body.standby .ui-panel, body.standby #build-sticker { opacity: 0; pointer-events: none; transform: translateY(40px); }
+        body.standby #interactive-grid { opacity: 0; pointer-events: none; }
         body:not(.standby) section { transition: opacity 1.2s 0.2s, transform 1.2s 0.2s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) main { transition: opacity 1.2s 0.4s, transform 1.2s 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) #audio-hub { transition: opacity 1.2s 0.6s, transform 1.2s 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) #build-sticker { transition: opacity 1.2s 0.7s, transform 1.2s 0.7s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) .ui-panel { transition: opacity 1.2s 0.8s, transform 1.2s 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
-        body:not(.standby) .social-dock { transition: opacity 1.2s 0.9s, transform 1.2s 0.9s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) #interactive-grid { transition: opacity 2s 1s; }
 
-        /* === INTERACTIVE GRID === */
-        #interactive-grid {
-            position: fixed; inset: 0; display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-            grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
-            pointer-events: none; z-index: 0; transition: opacity 0.5s ease;
-        }
+        /* === GRID & CURSOR (GPU Accelerated for Zero Lag) === */
+        #interactive-grid { position: fixed; inset: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); grid-template-rows: repeat(auto-fill, minmax(50px, 1fr)); pointer-events: none; z-index: 0; transition: opacity 0.5s ease; }
         .grid-cell { border: 0.5px solid rgba(0,0,0,0.04); transition: background-color 0.8s ease; pointer-events: auto; }
         .grid-cell.active { transition: 0s; }
 
-        /* === REFINED CURSOR ENGINE === */
-        #custom-cursor {
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
-            transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, border-radius 0.3s, background 0.3s, transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-            mix-blend-mode: exclusion; background: #fff;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .cursor-trail {
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998;
-            background: #fff; border-radius: 50%; mix-blend-mode: difference;
-            transform: translate(-50%, -50%); will-change: transform; transition: opacity 0.3s, border-radius 0.3s, background 0.3s, border 0.3s, box-shadow 0.3s;
-        }
+        #custom-cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; width: 25px; height: 25px; mix-blend-mode: exclusion; background: #fff; border-radius: 50%; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform-origin: center; transition: background 0.3s, border-radius 0.3s; }
+        .cursor-trail { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998; border-radius: 50%; mix-blend-mode: difference; background: #fff; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; transition: opacity 0.3s; }
+
+        /* === BESPOKE MODE SWITCHERS UI === */
+        .ui-panel { position: fixed; top: 2rem; right: 2rem; z-index: 100; display: flex; gap: 0.5rem; transition: 0.4s; }
+        .mode-btn { font-family: var(--font-sub); font-size: 10px; font-weight: 700; padding: 0.5rem 1rem; text-transform: uppercase; transition: 0.3s; }
+        .fx-btn { padding-left: 0.75rem; font-family: var(--font-sub); font-size: 9px; font-weight: bold; transition: 0.3s; display: flex; align-items: center; }
+        .fx-btn.muted { opacity: 0.4; text-decoration: line-through; }
+        
+        .mode-loud .ui-panel { background: #000; padding: 0.5rem; border: 3px solid #000; box-shadow: 4px 4px 0 #000; border-radius: 0; }
+        .mode-loud .mode-btn { color: #fff; border: 1px solid transparent; }
+        .mode-loud .mode-btn:hover { background: #222; }
+        .mode-loud .mode-btn.active { background: var(--accent-acid); color: #000; border-color: #000; }
+        .mode-loud .fx-btn { border-left: 1px solid rgba(255,255,255,0.2); color: #fff; }
+
+        .mode-tech .ui-panel { background: rgba(0,0,0,0.8); border: 1px solid #00ff41; padding: 0.25rem; box-shadow: 0 0 10px rgba(0,255,65,0.2); border-radius: 0; }
+        .mode-tech .mode-btn { color: #00ff41; opacity: 0.5; }
+        .mode-tech .mode-btn:hover { opacity: 1; text-shadow: 0 0 5px #00ff41; }
+        .mode-tech .mode-btn.active { opacity: 1; background: rgba(0,255,65,0.15); box-shadow: inset 0 0 5px rgba(0,255,65,0.5); }
+        .mode-tech .fx-btn { border-left: 1px dashed #00ff41; color: #00ff41; }
+
+        .mode-sleek .ui-panel { background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,1); padding: 0.35rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 50px; }
+        .mode-sleek .mode-btn { color: #888; border-radius: 50px; }
+        .mode-sleek .mode-btn:hover { color: #000; }
+        .mode-sleek .mode-btn.active { background: #fff; color: #000; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .mode-sleek .fx-btn { border-left: 1px solid rgba(0,0,0,0.1); color: #000; }
 
         /* === MODE 01: LOUD === */
         body.mode-loud { --bg-color: #f6f6f6; }
         .mode-loud .grid-cell.active { background-color: var(--accent-acid); }
-        
         .mode-loud .loud-dot { color: var(--accent-blue); transition: color 1s; }
         .mode-loud .loud-amp { color: var(--accent-pink); }
-        .loud-highlight { display: inline-block; transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); border: 4px solid transparent; padding: 0; }
-        .mode-loud .loud-highlight { 
-            background: var(--accent-acid); border-color: #000; box-shadow: 6px 6px 0 #000; 
-            padding: 0 1rem; transform: rotate(-2deg) translateY(-4px); margin: 0 0.5rem; 
-        }
+        
+        .loud-highlight, .tech-highlight { display: inline-block; transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); border: 4px solid transparent; padding: 0; position: relative; z-index: 10; cursor: none; }
+        
+        .mode-loud .loud-highlight { background: var(--accent-acid); border-color: #000; box-shadow: 6px 6px 0 #000; padding: 0 1rem; transform: rotate(-2deg) translateY(-4px); margin: 0 0.5rem; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .mode-loud .loud-highlight:hover { transform: rotate(-3deg) translateY(-8px) scale(1.08); box-shadow: 12px 12px 0 #000; z-index: 20; }
 
-        .mode-loud #custom-cursor { 
-            width: 25px; height: 25px; border-radius: 0; 
-            background: linear-gradient(135deg, var(--accent-pink), var(--accent-acid));
-            mix-blend-mode: difference; border: none; box-shadow: none;
-        }
-        .mode-loud #custom-cursor.hovering { transform: translate(-50%, -50%) scale(1.8); }
-        .mode-loud .cursor-trail { opacity: 1; background: var(--accent-blue); mix-blend-mode: difference; border-radius: 0; }
+        .mode-loud .tech-highlight { background: transparent; border: 4px solid transparent; box-shadow: none; padding: 0 1rem; transform: none; margin: 0 0.5rem; color: inherit; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .mode-loud .tech-highlight:hover { background: var(--accent-blue); border-color: #000; box-shadow: 8px 8px 0 #000; transform: translateY(-6px); color: #000; z-index: 20; }
+
+        .mode-loud #custom-cursor { border-radius: 0; background: linear-gradient(135deg, var(--accent-pink), var(--accent-acid)); mix-blend-mode: difference; }
+        .mode-loud #custom-cursor.hovering { transform: scale(1.8) !important; }
+        .mode-loud .cursor-trail { background: var(--accent-blue); border-radius: 0; }
         
-        .mode-loud .project-block { 
-            border: 4px solid #000; background: #fff; overflow: visible;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s; 
-        }
-        .mode-loud .project-block:nth-child(3n+1) { box-shadow: 12px 12px 0 var(--accent-acid); }
-        .mode-loud .project-block:nth-child(3n+2) { box-shadow: 12px 12px 0 var(--accent-pink); }
-        .mode-loud .project-block:nth-child(3n) { box-shadow: 12px 12px 0 var(--accent-blue); }
+        .mode-loud .project-block { border: 4px solid #000; background: #fff; overflow: visible; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s; }
         .mode-loud .project-block:hover { transform: translate(-4px, -4px); box-shadow: 16px 16px 0 #000; z-index: 20; }
-        
         .mode-loud .project-content { border-top: 4px solid #000; }
-        .mode-loud .project-title { color: #000; } 
-        .mode-loud .project-sticker { 
-            position: absolute; top: -15px; left: -15px; z-index: 30; 
-            transform: rotate(-3deg); border: 3px solid #000; box-shadow: 4px 4px 0 #000; 
-            color: #000; padding: 4px 12px; font-family: var(--font-sub); font-weight: 900; text-transform: uppercase; font-size: 11px;
-        }
+        .mode-loud .project-sticker { position: absolute; top: -15px; left: -15px; z-index: 30; transform: rotate(-3deg); border: 3px solid #000; box-shadow: 4px 4px 0 #000; color: #000; padding: 4px 12px; font-family: var(--font-sub); font-weight: 900; text-transform: uppercase; font-size: 11px; }
         .mode-loud .exec-btn { background: #000; color: #fff; font-family: var(--font-sub); font-size: 10px; font-weight: bold; text-transform: uppercase; padding: 6px 12px; display: inline-block; transition: 0.2s; }
         .mode-loud .exec-btn:hover { background: var(--accent-acid); color: #000; }
-
-        .mode-loud .img-fit { filter: saturate(1) brightness(0.95); }
+        .mode-loud .img-fit { filter: saturate(1) brightness(0.95); transition: 0.3s; }
         .mode-loud .project-block:hover .img-fit { filter: saturate(2) brightness(1.15) contrast(1.1); transform: scale(1.05); }
 
         /* === MODE 02: TECH === */
-        body.mode-tech { 
-            --bg-color: #030805; --text-color: #00ff41; 
-            background-color: #000;
-            background-image: radial-gradient(rgba(0,255,65,0.15) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
+        body.mode-tech { --bg-color: #030805; --text-color: #00ff41; background-color: #000; background-image: radial-gradient(rgba(0,255,65,0.15) 1px, transparent 1px); background-size: 20px 20px; }
         .mode-tech #interactive-grid { display: none; } 
         
-        .mode-tech #custom-cursor { width: 40px; height: 40px; border-radius: 50%; background: transparent; border: 1px solid #00ff41; mix-blend-mode: normal; }
-        .mode-tech #custom-cursor::after { content: ''; width: 4px; height: 4px; background: #00ff41; border-radius: 50%; box-shadow: 0 0 8px #00ff41; }
-        .mode-tech #custom-cursor.hovering { transform: translate(-50%, -50%) scale(1.3); background: rgba(0,255,65,0.1); }
-        
-        .mode-tech .cursor-trail { 
-            opacity: 1; background: transparent; mix-blend-mode: normal;
-            border: 1px solid rgba(0,255,65,0.6); box-shadow: 0 0 10px rgba(0,255,65,0.5); border-radius: 0; 
+        /* New Glitch to Pulse Sequence */
+        @keyframes tech-zap {
+            0%, 100% { text-shadow: 0 0 2px #fff, 0 0 8px #00ff41; transform: skewX(0deg); color: #fff; }
+            20% { text-shadow: 3px 0 5px #fff, -3px 0 15px #00ff41; transform: skewX(-8deg); color: #00ff41; }
+            40% { text-shadow: -3px 0 5px #fff, 3px 0 15px #00ff41; transform: skewX(8deg); color: #fff; }
+            60% { text-shadow: 0 0 10px #fff, 0 0 25px #00ff41; transform: skewX(0deg); color: #00ff41; }
+            80% { text-shadow: 2px 2px 2px #fff, -2px -2px 10px #00ff41; transform: skewX(-4deg); color: #fff; }
         }
+
+        @keyframes tech-pulse {
+            0%, 100% { text-shadow: 0 0 5px #fff, 0 0 15px #00ff41; color: #fff; transform: skewX(0deg); }
+            50% { text-shadow: 0 0 10px #fff, 0 0 30px #00ff41; color: #00ff41; transform: skewX(0deg); }
+        }
+        
+        .mode-tech .loud-highlight:hover, .mode-tech .tech-highlight:hover { 
+            animation: tech-zap 0.1s 4 forwards, tech-pulse 3s 0.4s infinite alternate ease-in-out; 
+            background: transparent; 
+            border: none; 
+            padding: 0 1rem; 
+        }
+
+        .mode-tech #custom-cursor { background: #00ff41; border: none; mix-blend-mode: normal; box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41; }
+        .mode-tech #custom-cursor.hovering { transform: scale(1.6) !important; background: #fff; box-shadow: 0 0 20px #fff, 0 0 40px #00ff41; }
+        .mode-tech .cursor-trail { background: rgba(0,255,65,0.8); border: none; mix-blend-mode: normal; box-shadow: 0 0 8px #00ff41, 0 0 15px #00ff41; }
         
         .mode-tech .project-block { border: 1px solid #00ff41; background: #000; box-shadow: 0 0 15px rgba(0,255,65,0.05); overflow: hidden; }
-        
-        @keyframes tech-tremble-stop {
-            0% { transform: translate(0); box-shadow: 0 0 15px rgba(0,255,65,0.05); }
-            10% { transform: translate(-2px, 1px); }
-            20% { transform: translate(2px, -2px); }
-            30% { transform: translate(-1px, 2px); }
-            40% { transform: translate(1px, -1px); }
-            50% { transform: translate(0); box-shadow: 0 0 35px rgba(0,255,65,0.5); }
-            100% { transform: translate(0); box-shadow: 0 0 25px rgba(0,255,65,0.3); } 
-        }
-        .mode-tech .project-block:hover { animation: tech-tremble-stop 0.4s forwards; z-index: 20; }
-        
+        .mode-tech .project-block:hover { transform: translate(0); box-shadow: 0 0 25px rgba(0,255,65,0.4); z-index: 20; }
         .mode-tech .project-content { border-top: 1px solid #00ff41; background: #000; color: #00ff41; }
         .mode-tech .project-title { color: #fff; }
         .mode-tech .project-sticker { position: absolute; top: 0; left: 0; background: #00ff41; color: #000; padding: 4px 10px; font-family: var(--font-sub); font-size: 10px; font-weight: bold; text-transform: uppercase; z-index: 30; }
-        .mode-tech .exec-btn { background: transparent; border: 1px solid #00ff41; color: #00ff41; font-family: var(--font-sub); font-size: 10px; padding: 6px 12px; display: inline-block; text-transform: uppercase; transition: 0.2s; }
+        .mode-tech .exec-btn { background: transparent; border: 1px solid #00ff41; color: #00ff41; font-family: var(--font-sub); font-size: 10px; padding: 6px 12px; display: inline-block; transition: 0.2s; }
         .mode-tech .exec-btn:hover { background: #00ff41; color: #000; }
-        
-        .mode-tech .img-fit { filter: sepia(1) hue-rotate(80deg) saturate(3) brightness(0.4); }
+        .mode-tech .img-fit { filter: sepia(1) hue-rotate(80deg) saturate(3) brightness(0.4); transition: 0.3s; }
         .mode-tech .project-block:hover .img-fit { filter: sepia(1) hue-rotate(80deg) saturate(5) brightness(0.8); transform: scale(1.02); }
 
         /* === MODE 03: SLEEK === */
         body.mode-sleek { --bg-color: #ffffff; --text-color: #0a0a0a; }
         .mode-sleek #interactive-grid { opacity: 0; display: none; }
-        .mode-sleek #custom-cursor { width: 20px; height: 20px; border-radius: 50%; mix-blend-mode: difference; background: #fff; border: none; }
-        .mode-sleek #custom-cursor.hovering { transform: translate(-50%, -50%) scale(2.5); }
-        .mode-sleek #custom-cursor::after { display: none; }
-        .mode-sleek .cursor-trail { opacity: 1; mix-blend-mode: difference; background: #fff; }
+        .mode-sleek #custom-cursor { mix-blend-mode: difference; background: #fff; border: none; transform: scale(0.8); }
+        .mode-sleek #custom-cursor.hovering { transform: scale(1.8) !important; }
+        .mode-sleek .cursor-trail { mix-blend-mode: difference; background: #fff; }
         
-        .mode-sleek .project-block { 
-            border: none; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); overflow: hidden; background: #fff; 
-            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        .mode-sleek .loud-highlight, .mode-sleek .tech-highlight { 
+            padding: 0 0.5rem; transition: color 0.4s; border: none; margin: 0 0.2rem; color: inherit; display: inline-block;
+        }
+
+        @keyframes sleek-hover-float {
+            0%, 100% { transform: translateY(-5px); text-shadow: 0px 4px 15px rgba(0,0,0,0.1), 0px 0px 25px rgba(100,150,255,0.4); }
+            50% { transform: translateY(-8px); text-shadow: 0px 8px 20px rgba(0,0,0,0.15), 0px 0px 35px rgba(100,150,255,0.6); }
         }
         
-        @keyframes sleek-float-settle {
-            0% { transform: translateY(0); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-            50% { transform: translateY(-12px); box-shadow: 0 40px 70px rgba(0,0,0,0.12); } 
-            100% { transform: translateY(-6px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); } 
+        .mode-sleek .loud-highlight:hover, .mode-sleek .tech-highlight:hover { 
+            animation: sleek-hover-float 3s ease-in-out infinite;
+            z-index: 20; color: inherit; 
         }
-        .mode-sleek .project-block:hover { animation: sleek-float-settle 0.4s cubic-bezier(0.19, 1, 0.22, 1) forwards; z-index: 20; }
-        
+
+        .mode-sleek .project-block { border: none; border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,1), 0 10px 30px rgba(0,0,0,0.03); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+        .mode-sleek .project-block:hover { transform: translateY(-8px); box-shadow: inset 0 0 0 1px rgba(255,255,255,1), 0 25px 50px rgba(0,0,0,0.08); z-index: 20; }
         .mode-sleek .project-content { background: #fff; color: #0a0a0a; border-top: none; }
         .mode-sleek .project-title { color: #000; }
-        .mode-sleek .project-sticker { position: absolute; top: 1rem; left: 1rem; background: #f4f4f4; color: #000; border-radius: 50px; font-family: var(--font-sub); font-size: 10px; padding: 5px 15px; font-weight: bold; text-transform: uppercase; z-index: 30; }
-        .mode-sleek .exec-btn { background: #f4f4f4; color: #000; border-radius: 50px; font-family: var(--font-sub); font-size: 10px; padding: 6px 15px; display: inline-block; text-transform: uppercase; font-weight: bold; transition: 0.2s; }
+        .mode-sleek .project-sticker { position: absolute; top: 1rem; left: 1rem; background: #f4f4f4; color: #000; border-radius: 50px; font-family: var(--font-sub); font-size: 10px; padding: 5px 15px; font-weight: bold; z-index: 30; }
+        .mode-sleek .exec-btn { background: #f4f4f4; color: #000; border-radius: 50px; font-family: var(--font-sub); font-size: 10px; padding: 6px 15px; font-weight: bold; transition: 0.2s; }
         .mode-sleek .exec-btn:hover { background: #000; color: #fff; }
-        
-        .mode-sleek .img-fit { filter: brightness(0.9) saturate(0.8); }
+        .mode-sleek .img-fit { filter: brightness(0.9) saturate(0.8); transition: 0.4s; }
         .mode-sleek .project-block:hover .img-fit { filter: brightness(1) saturate(1); transform: scale(1.02); }
 
         /* === GRID ARCHITECTURE === */
-        .project-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 3.5rem 2.5rem; padding: 0 4rem 10rem 4rem; max-width: 1800px; margin: 0 auto; position: relative; z-index: 10;
-        }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3.5rem 2.5rem; padding: 0 4rem 24rem 4rem; max-width: 1800px; margin: 0 auto; position: relative; z-index: 10; }
         .project-block { display: flex; flex-direction: column; position: relative; }
-        
         .img-wrap { height: 260px; position: relative; width: 100%; overflow: hidden; cursor: crosshair; }
         .media-target { width: 100%; height: 100%; }
         .img-fit { width: 100%; height: 100%; object-fit: cover; }
-
-        .img-wrap::after {
-            content: 'SWAP MEDIA'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            background: var(--accent-acid); color: #000; border: 2px solid #000; padding: 6px 14px;
-            font-family: var(--font-sub); font-size: 11px; font-weight: bold; 
-            opacity: 0; transition: 0.3s; z-index: 20; pointer-events: none;
-        }
+        .img-wrap::after { content: 'SWAP MEDIA'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--accent-acid); color: #000; border: 2px solid #000; padding: 6px 14px; font-family: var(--font-sub); font-size: 11px; font-weight: bold; opacity: 0; transition: 0.3s; z-index: 20; pointer-events: none; }
         .mode-tech .img-wrap::after { background: #000; color: #00ff41; border-color: #00ff41; }
         .mode-sleek .img-wrap::after { background: #fff; color: #000; border: none; border-radius: 50px; }
         .img-wrap:hover::after { opacity: 1; }
 
-        /* === UI ELEMENTS === */
-        .ui-panel { position: fixed; top: 2rem; right: 2rem; z-index: 100; display: flex; gap: 0.5rem; background: #000; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-        .mode-btn { color: #fff; font-family: var(--font-sub); font-size: 10px; font-weight: 700; padding: 0.5rem 1rem; text-transform: uppercase; }
-        .mode-btn.active { background: #fff; color: #000; }
-
-        /* === COMPACT AUDIO DOCK === */
-        #audio-hub {
-            position: fixed; bottom: 3.5rem; left: 2rem; z-index: 8500; 
-            display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
-        }
-        .audio-card { width: 480px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px); color: #fff; border-radius: 4px; overflow: hidden; transition: 0.3s; }
-        .mode-sleek .audio-card { background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.1); color: #000; }
-        .mode-tech .audio-card { border-color: rgba(0,255,65,0.3); color: #00ff41; background: #000; }
+        /* === AUDIO PLAYER DOCK === */
+        #audio-hub { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 8500; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .audio-card { width: auto; max-width: 90vw; padding: 0.75rem 1rem; border-radius: 4px; transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: row; align-items: center; }
         
-        .audio-header { padding: 0.6rem 1rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sub); font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; text-decoration: none; color: inherit; }
-        .audio-header:hover { background: rgba(255,255,255,0.1); }
-        .mode-sleek .audio-header:hover { background: rgba(0,0,0,0.05); }
+        .mode-loud .audio-card { background: var(--accent-acid); color: #000; border: 3px solid #000; box-shadow: 8px 8px 0 #000; }
+        .mode-loud .audio-card .border-r, .mode-loud .audio-card .border-l { border-color: rgba(0,0,0,0.2) !important; }
         
-        .audio-accordion { max-height: 0; transition: max-height 0.4s cubic-bezier(0.19, 1, 0.22, 1); overflow: hidden; padding: 0 1rem; }
-        .audio-accordion.open { padding-bottom: 0.75rem; max-height: 250px; } 
+        @keyframes tech-glow-pulse { 0% { box-shadow: 0 0 10px rgba(0,255,65,0.2); } 50% { box-shadow: 0 0 25px rgba(0,255,65,0.6); } 100% { box-shadow: 0 0 10px rgba(0,255,65,0.2); } }
+        .mode-tech .audio-card { background: #000; color: #00ff41; border: 1px solid #00ff41; animation: tech-glow-pulse 3s infinite ease-in-out; }
+        
+        .mode-sleek .audio-card { background: rgba(255,255,255,0.5); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.8); color: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 16px; }
 
-        .sensor-btn {
-            background: transparent; color: inherit; border: none; font-size: 12px; 
-            display: flex; align-items: center; gap: 8px; position: relative;
-        }
+        .audio-accordion { max-width: 0; opacity: 0; transition: max-width 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s; overflow: hidden; display: flex; align-items: center; }
+        .audio-accordion.open { max-width: 900px; opacity: 1; padding-left: 1.5rem; } 
+
+        .sensor-btn { background: transparent; color: inherit; border: none; font-size: 12px; display: flex; align-items: center; gap: 6px; padding: 0 6px; font-family: var(--font-sub); font-weight: bold; opacity: 0.6; transition: 0.2s; }
+        .sensor-btn:hover { opacity: 1; }
         .sensor-btn svg { width: 14px; height: 14px; }
-        .sensor-btn::after {
-            content: '[CLAP TO ACTIVATE]'; position: absolute; left: 100%; top: 50%; transform: translateY(-50%);
-            margin-left: 10px; background: var(--text-color); color: var(--bg-color); padding: 4px 8px;
-            font-family: var(--font-sub); font-size: 9px; white-space: nowrap; opacity: 0; transition: 0.2s; pointer-events: none;
-        }
-        .sensor-btn:hover::after { opacity: 1; }
-        .sensor-btn.listening svg { color: var(--accent-acid); animation: pulse 1s infinite; }
-        .mode-tech .sensor-btn.listening svg { color: #00ff41; }
+        .sensor-btn.listening { opacity: 1; color: var(--accent-pink); animation: pulse-mic 1.5s infinite alternate; }
+        @keyframes pulse-mic { from { transform: scale(1); } to { transform: scale(1.15); } }
+        .mode-tech .sensor-btn.listening { color: #fff; text-shadow: 0 0 8px #fff; }
 
-        /* === ADAPTIVE SOCIAL DOCK === */
-        .social-dock {
-            position: fixed; left: 50%; transform: translateX(-50%); z-index: 8000; 
-            display: flex; gap: 1.5rem; opacity: 0.4; transition: opacity 0.3s, bottom 0.3s cubic-bezier(0.19, 1, 0.22, 1); 
-            mix-blend-mode: difference; color: #fff;
-            bottom: 1.5rem; 
-        }
-        .social-dock:hover { opacity: 1; }
-        body.mode-loud .social-dock { bottom: 4rem; } 
+        .eq-container { display: flex; gap: 2px; align-items: flex-end; height: 10px; width: 12px; margin-left: 6px; opacity: 0; transition: opacity 0.3s; }
+        .playing .eq-container { opacity: 1; }
+        .eq-bar { width: 2px; height: 10px; background: currentColor; transform-origin: bottom; transform: scaleY(0.2); animation: eq-bounce 0.5s infinite ease-in-out alternate; will-change: transform; }
+        .eq-bar:nth-child(1) { animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { animation-delay: 0s; }
+        @keyframes eq-bounce { 0% { transform: scaleY(0.2); } 100% { transform: scaleY(1); } }
 
-        /* === DYNAMIC CONTACT BUTTON === */
-        #build-sticker {
-            position: fixed; bottom: 3.5rem; right: 2rem; z-index: 8500;
-            background: var(--accent-acid); color: #000; padding: 1.25rem;
-            font-family: var(--font-main); font-size: 14px; text-transform: uppercase; line-height: 1.2;
-            border: 3px solid #000; box-shadow: 6px 6px 0 #000;
-            transform: rotate(-4deg); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .help-trigger { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid currentColor; border-radius: 50%; font-size: 10px; font-weight: bold; opacity: 0.6; cursor: help; margin-left: 4px; }
+        .help-trigger:hover { opacity: 1; background: currentColor; color: var(--bg-color); }
+        .help-modal { position: absolute; bottom: calc(100% + 15px); left: 0; width: 240px; background: #000; color: #fff; border: 1px solid currentColor; padding: 1.25rem; font-family: var(--font-sub); font-size: 9px; line-height: 1.6; pointer-events: none; opacity: 0; transform: translateY(10px); transition: 0.3s; z-index: 9000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .mode-sleek .help-modal { background: #fff; color: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 8px; }
+        .help-trigger:hover .help-modal { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+        #build-sticker { position: fixed; bottom: 3.5rem; right: 2rem; z-index: 8500; background: var(--accent-acid); color: #000; padding: 1.25rem; font-family: var(--font-main); font-size: 14px; text-transform: uppercase; border: 3px solid #000; box-shadow: 6px 6px 0 #000; transform: rotate(-4deg); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         #build-sticker:hover { transform: rotate(0deg) scale(1.05); background: var(--text-color); color: var(--bg-color); border-color: var(--bg-color); }
-        
-        .mode-tech #build-sticker { 
-            background: #000; color: #00ff41; border-color: #00ff41; box-shadow: 0 0 15px rgba(0,255,65,0.2); 
-            transform: none; font-family: var(--font-sub); font-size: 12px; letter-spacing: 1px;
-        }
+        .mode-tech #build-sticker { background: #000; color: #00ff41; border-color: #00ff41; box-shadow: 0 0 15px rgba(0,255,65,0.2); transform: none; font-family: var(--font-sub); font-size: 12px; }
         .mode-tech #build-sticker:hover { box-shadow: 0 0 25px rgba(0,255,65,0.5); background: rgba(0,255,65,0.1); }
-        
-        .mode-sleek #build-sticker { 
-            background: #000; color: #fff; border-color: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-            border-radius: 50px; padding: 1rem 2rem; transform: none; font-family: var(--font-sub); font-size: 12px; font-weight: bold;
-        }
-        .mode-sleek #build-sticker:hover { background: var(--accent-blue); border-color: var(--accent-blue); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,68,255,0.2); }
+        .mode-sleek #build-sticker { background: #000; color: #fff; border-color: #000; border-radius: 50px; padding: 1rem 2rem; transform: none; font-family: var(--font-sub); font-size: 12px; }
+        .mode-sleek #build-sticker:hover { background: var(--accent-blue); border-color: var(--accent-blue); transform: translateY(-3px); }
 
-        #contact-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
-            z-index: 30000; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s;
-        }
+        #contact-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 30000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
         #contact-modal.active { opacity: 1; pointer-events: auto; }
         .modal-bg-click { position: absolute; inset: 0; cursor: pointer; } 
-        .modal-content {
-            background: var(--bg-color); color: var(--text-color); width: 100%; max-width: 500px;
-            padding: 3.5rem 3rem 3rem 3rem; position: relative; border: 2px solid var(--text-color);
-            transform: translateY(20px); transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); z-index: 30001;
-        }
+        .modal-content { background: var(--bg-color); color: var(--text-color); width: 100%; max-width: 500px; padding: 3.5rem 3rem 3rem 3rem; position: relative; border: 2px solid var(--text-color); transform: translateY(20px); transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); z-index: 30001; }
         #contact-modal.active .modal-content { transform: translateY(0); }
-        
         .close-btn { position: absolute; top: 1rem; right: 1.5rem; font-family: var(--font-sub); font-weight: bold; font-size: 1.5rem; background: transparent; border: none; color: inherit; z-index: 30002; transition: opacity 0.2s; cursor: pointer; }
         .close-btn:hover { opacity: 0.5; transform: scale(1.2); }
 
-        .ticker-tape { position: fixed; bottom: 0; left: 0; width: 100%; overflow: hidden; z-index: 8000; display: none; }
-        a, button, .audio-header, #build-sticker, input, textarea, .project-block, .play-btn { cursor: none; }
+        a, button, .audio-header, #build-sticker, input, textarea, .project-block, .play-btn, .loud-highlight, .tech-highlight, .icon-link { cursor: none; }
     </style>
 </head>
 <body class="mode-loud standby" id="portfolio-body">
 
     <input type="file" id="mediaUploader" accept="image/*,video/mp4,video/webm" style="display: none;">
-    
     <div id="interactive-grid"></div>
-    <div class="scanlines"></div>
 
     <div id="custom-cursor"></div>
     <div class="cursor-trail w-4 h-4" id="trail-1"></div>
@@ -314,10 +260,10 @@
         <button class="mode-btn active" onclick="setMode('mode-loud', this)">01_LOUD</button>
         <button class="mode-btn" onclick="setMode('mode-tech', this)">02_TECH</button>
         <button class="mode-btn" onclick="setMode('mode-sleek', this)">03_SLEEK</button>
+        <button id="fx-toggle" class="fx-btn" onclick="toggleFX()">FX: ON</button>
     </div>
 
-    <!-- The Ignition Trigger -->
-    <header id="boot-trigger" class="absolute top-12 left-12 z-[90000] flex flex-col">
+    <header id="boot-trigger" class="flex flex-col">
         <div class="logo-text font-['Bungee'] text-6xl tracking-tighter mb-2">AM<span class="loud-dot">.</span></div>
         <div class="copyright-text font-['Space_Mono'] text-[10px] font-bold uppercase opacity-60 tracking-widest transition-opacity duration-1000">
             © 2026 ANDREA MERELLA
@@ -326,489 +272,608 @@
 
     <section class="pt-56 pb-20 px-16 max-w-7xl relative z-10">
         <h1 class="font-['Bungee'] text-[5rem] uppercase leading-[0.85] mb-6">
-            Engineering <span class="loud-highlight">Sound</span> <br> <span class="loud-amp">&</span> Systems.
+            Engineering <span class="loud-highlight">Sound</span> <br> <span class="loud-amp">&</span> <span class="tech-highlight">Systems</span>.
         </h1>
         <p class="font-['Space_Mono'] text-base max-w-2xl opacity-80 leading-relaxed">Audio Specialist and Creative Developer based in Amsterdam. I work with sound and visuals, architect robust web frameworks, and build high-voltage, all-around digital experiences.</p>
     </section>
 
     <main class="project-grid">
-        <div class="project-block group">
+        <div class="project-block group" id="proj-vanguard">
             <span class="project-sticker bg-white">HYBRID WORKSTATION</span>
             <div class="img-wrap" onclick="handleProjectClick(this, event)">
-                <div class="media-target w-full h-full"><img src="VNGRD:: PIC.jpg" class="img-fit"></div>
+                <div class="media-target w-full h-full"><video src="vngrd.mp4" class="img-fit" autoplay loop muted playsinline></video></div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">VNGRD//</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">VNGRD// is an experimental browser-native media system for real-time audiovisual production, exploring how recording, visualization, and export can be unified into a single workflow.</p>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Experimental browser-native media system for real-time audiovisual production.</p>
                 </div>
-                <div><a href="https://vngrd-core.github.io/" target="_blank" class="exec-btn">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://vngrd-core.github.io/" target="_blank" class="exec-btn" id="link-vanguard">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
-        <div class="project-block group">
+        <div class="project-block group" id="proj-sdrocer">
             <span class="project-sticker bg-lime-400">VINYL DIGGER</span>
             <div class="img-wrap" onclick="handleProjectClick(this, event)">
-                <div class="media-target w-full h-full"><img src="Screenshot 2026-05-02 at 01.03.41.jpg" class="img-fit"></div>
+                <div class="media-target w-full h-full"><video src="Screen Recording 2026-05-03 at 16.42.02.mov" class="img-fit" autoplay loop muted playsinline></video></div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">SDROCER</h2>
                     <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Interactive digital crate-digging experience.</p>
                 </div>
-                <div><a href="https://andreamerella.github.io/SDROCER/" target="_blank" class="exec-btn">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://andreamerella.github.io/SDROCER/" target="_blank" class="exec-btn" id="link-sdrocer">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
-        <div class="project-block group">
-            <span class="project-sticker bg-pink-500 text-white">WEB3</span>
+        <div class="project-block group" id="proj-mattie">
+            <span class="project-sticker bg-pink-500 text-white">HYBRID WORKSTATION</span>
             <div class="img-wrap" onclick="handleProjectClick(this, event)">
-                <div class="media-target w-full h-full"><img src="https://images.unsplash.com/photo-1639762681485-074b7f4ec651?auto=format&fit=crop&w=800" class="img-fit"></div>
+                <div class="media-target w-full h-full"><img src="Screenshot 2026-05-03 at 16.37.45.jpg" class="img-fit"></div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">MATTIE / WEB3</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Decentralized creative lab. Blending blockchain integration with highly energetic visual layouts.</p>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Decentralized hybrid workstation. Blending blockchain integration with highly energetic visual layouts.</p>
                 </div>
-                <div><a href="https://andreamerellaaudio.wixsite.com/driscreativelab/mattie-web3" target="_blank" class="exec-btn">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://andreamerellaaudio.wixsite.com/driscreativelab/mattie-web3" target="_blank" class="exec-btn" id="link-mattie">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
-        <div class="project-block group">
+        <div class="project-block group" id="proj-explorer">
             <span class="project-sticker bg-blue-500 text-white">GEODATA</span>
             <div class="img-wrap" onclick="handleProjectClick(this, event)">
-                <div class="media-target w-full h-full"><img src="Amsterdam explorer cover.jpg" class="img-fit"></div>
+                <div class="media-target w-full h-full"><img src="amsterdam explorer cover.jpg" class="img-fit" onerror="this.src='amsterdam explorer cover.png'"></div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">EXPLORER</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">An interactive, educational Progressive Web App (PWA) designed to help kids navigate and map the urban soundscape of Amsterdam in a fun, engaging way.</p>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">An interactive, educational Progressive Web App (PWA) designed to help kids navigate and map the urban soundscape of Amsterdam.</p>
                 </div>
-                <div><a href="#" target="_blank" class="exec-btn">EXECUTE HUB &rarr;</a></div>
+                <div><a href="#" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
-        <div class="project-block group">
+        <div class="project-block group" id="proj-heavy-marine">
             <span class="project-sticker bg-yellow-400">CIRCULAR ECONOMY</span>
             <div class="img-wrap" onclick="handleProjectClick(this, event)">
-                <div class="media-target w-full h-full"><img src="HMU PIC2.jpg" class="img-fit"></div>
+                <div class="media-target w-full h-full"><img src="hmu poc 2.jpg" class="img-fit"></div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">HEAVY MARINE</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">A forward-thinking concept merging sustainable fashion and circular economy principles, wrapped in a heavy-duty industrial web interface.</p>
+                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">HEAVY MARINE UTILITY</h2>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">A forward-thinking concept merging sustainable fashion and circular economy principles.</p>
                 </div>
-                <div><a href="https://andreamerella.github.io/Heavy-Marine-Utilities/" target="_blank" class="exec-btn">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://andreamerella.github.io/Heavy-Marine-Utilities/" target="_blank" class="exec-btn" id="link-heavy-marine">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
-        <div class="project-block group">
+        <div class="project-block group" id="proj-dris-lab">
             <span class="project-sticker bg-cyan-400">AUDIO/VISUAL</span>
             <div class="img-wrap" onclick="handleProjectClick(this, event)">
-                <div class="media-target w-full h-full"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800" class="img-fit"></div>
+                <div class="media-target w-full h-full"><img src="dris lab.jpg" class="img-fit"></div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">DRIS_LAB</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Interactive audio-visual platform for advanced sound synthesis and real-time visual rendering environments.</p>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Interactive audio-visual platform for advanced sound synthesis and real-time visual rendering.</p>
                 </div>
-                <div><a href="https://andreamerella.github.io/DrisLab/" target="_blank" class="exec-btn">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://andreamerella.github.io/DrisLab/" target="_blank" class="exec-btn" id="link-dris-lab">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
     </main>
 
-    <!-- UNIFIED COMPACT AUDIO DOCK -->
+    <!-- EXPLICIT MUSIC PLAYER DOCK -->
     <div id="audio-hub">
-        <div class="audio-card">
-            <div class="audio-header border-b border-[rgba(255,255,255,0.1)] mode-sleek:border-[rgba(0,0,0,0.1)] mode-tech:border-[rgba(0,255,65,0.3)]" onclick="toggleAudio('main')">
-                <div class="flex items-center gap-2">
-                    <span>[+] SYSTEM AUDIO</span>
-                    <button class="sensor-btn z-50" id="mic-trigger" onclick="event.stopPropagation(); toggleClapSensor();">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
-                    </button>
+        <div class="audio-card" id="music-player-card">
+            
+            <div class="flex items-center pr-5 border-r border-[rgba(255,255,255,0.2)] mode-sleek:border-[rgba(0,0,0,0.1)] mode-tech:border-[rgba(0,255,65,0.3)]">
+                <div class="flex flex-col cursor-pointer hover:opacity-70 transition-opacity mr-4" onclick="toggleAudio('main')">
+                    <span class="font-['Bungee'] text-[13px] leading-none mb-0.5 tracking-wide">♫ MUSIC PLAYER</span>
+                    <span class="font-['Space_Mono'] text-[9px] font-bold opacity-70 tracking-widest">// SYSTEM AUDIO</span>
                 </div>
-                <span id="icon-main"></span>
+                
+                <button class="sensor-btn bg-black/10 rounded px-2 py-1 mode-sleek:bg-black/5" id="mic-trigger" onclick="event.stopPropagation(); toggleVoiceAndClap();">
+                    <span class="text-[9px]">CMD: OFF</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                </button>
+
+                <div class="help-trigger">?
+                    <div class="help-modal text-left">
+                        <strong class="text-[12px] block border-b border-current pb-2 mb-3">VOICE & AUDIO CMD</strong>
+                        <ul class="list-none p-0 m-0 space-y-2">
+                            <li><span class="opacity-60">Say</span> "Music" — <span class="opacity-60">Play / Pause</span></li>
+                            <li><span class="opacity-60">Say</span> "Next / Previous" — <span class="opacity-60">Change Track</span></li>
+                            <li><span class="opacity-60">Say</span> "Vanguard" <span class="opacity-60">(or any project) to launch.</span></li>
+                            <li class="pt-2 mt-2 border-t border-[rgba(255,255,255,0.2)]"><span class="opacity-60">Action:</span> Clap Hands — <span class="opacity-60">Play / Pause</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
             <div id="panel-main" class="audio-accordion">
-                <audio id="native-audio" loop>
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                </audio>
+                <audio id="native-audio" loop></audio>
 
-                <div class="mt-2 mb-2 border border-current p-2 relative group">
-                    <div class="font-['Space_Mono'] text-[10px] uppercase font-bold mb-2 flex justify-between">
-                        <span class="truncate pr-2 opacity-90">01_SYSTEM_TEST_TRACK.WAV</span>
-                        <span id="track-time" class="opacity-70 flex-shrink-0">00:00</span>
+                <div class="flex items-center gap-4 w-full min-w-[380px]">
+                    <button id="custom-play-btn" class="play-btn w-8 h-8 flex-shrink-0 flex items-center justify-center border-2 border-current rounded-full hover:bg-current hover:text-[var(--bg-color)] transition-colors mode-loud:rounded-none">
+                        <svg id="icon-play" class="w-3.5 h-3.5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                        <svg id="icon-pause" class="w-3.5 h-3.5 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    
+                    <div class="flex flex-col">
+                        <div class="flex items-center">
+                            <span id="track-title" class="font-['Space_Mono'] text-[11px] uppercase font-bold truncate max-w-[140px]">01_SYSTEM.WAV</span>
+                            <div class="eq-container">
+                                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                            </div>
+                        </div>
+                        <span id="track-time" class="font-['Space_Mono'] text-[9px] font-bold opacity-60">00:00</span>
+                    </div>
+
+                    <div id="custom-progress-container" class="flex-1 h-2 border border-current relative cursor-pointer bg-black/10 mode-tech:bg-[#00ff41]/20 hover:h-3 transition-all min-w-[100px] mode-sleek:rounded-full mode-sleek:overflow-hidden">
+                        <div id="custom-progress-bar" class="absolute top-0 left-0 h-full bg-current w-0 pointer-events-none"></div>
                     </div>
                     
-                    <div class="flex items-center gap-4">
-                        <button id="custom-play-btn" class="play-btn w-6 h-6 flex-shrink-0 flex items-center justify-center border border-current hover:bg-current hover:text-[var(--bg-color)] transition-colors">
-                            <svg id="icon-play" class="w-3 h-3 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
-                            <svg id="icon-pause" class="w-3 h-3 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        </button>
-                        
-                        <div id="custom-progress-container" class="flex-1 h-2 border border-current relative cursor-pointer bg-transparent group-hover:h-3 transition-all">
-                            <div id="custom-progress-bar" class="absolute top-0 left-0 h-full bg-current w-0 pointer-events-none"></div>
-                        </div>
+                    <div class="flex items-center gap-4 border-l border-[rgba(255,255,255,0.2)] mode-sleek:border-[rgba(0,0,0,0.1)] mode-tech:border-[rgba(0,255,65,0.3)] pl-5">
+                        <a href="https://open.spotify.com/artist/0XPPJdH7cRPxVBSjXfi9iE" target="_blank" class="icon-link hover:text-[var(--accent-blue)] transition-colors"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.24 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.02.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.781-.18-.6.18-1.2.78-1.38 4.2-1.26 11.28-1.02 15.721 1.62.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+                        <a href="https://soundcloud.com/andrea_merella" target="_blank" class="icon-link hover:text-[var(--accent-acid)] transition-colors"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M11.81 12.21a1.47 1.47 0 0 0-1.47 1.47v6.62a1.47 1.47 0 0 0 1.47 1.47h8.4A3.79 3.79 0 0 0 24 18.01a3.78 3.78 0 0 0-3.78-3.78h-.44a6.6 6.6 0 0 0-11.33-4.8 4.7 4.7 0 0 0-3.8-1.89 4.72 4.72 0 0 0-4.65 4.74c0 .35.04.69.11 1.03A2.84 2.84 0 0 0 0 16.14a2.84 2.84 0 0 0 2.84 2.84h3.6v-5.3A1.47 1.47 0 0 0 4.97 12.2a1.47 1.47 0 0 0-1.47 1.47v5.3H2.84A1.37 1.37 0 0 1 1.47 16.14a1.37 1.37 0 0 1 1.25-1.36 1.47 1.47 0 0 0 1.35-1.47c-.06-.28-.09-.57-.09-.86a3.25 3.25 0 0 1 3.24-3.24 3.23 3.23 0 0 1 3.1 2.37 1.47 1.47 0 0 0 1.4 1.1h.06v5.3h-1.47v-6.62Z"/></svg></a>
+                        <a href="https://andreamerella.bandcamp.com/" target="_blank" class="icon-link hover:text-[var(--accent-pink)] transition-colors"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg></a>
                     </div>
-                </div>
-
-                <div class="flex justify-between font-['Space_Mono'] text-[9px] uppercase border-t border-[rgba(255,255,255,0.1)] mode-sleek:border-[rgba(0,0,0,0.1)] mode-tech:border-[rgba(0,255,65,0.3)] pt-2 mt-1 opacity-60">
-                    <a href="https://open.spotify.com/artist/0XPPJdH7cRPxVBSjXfi9iE" target="_blank" class="hover:opacity-100 hover:text-[var(--accent-blue)] transition-colors">SPOTIFY ↗</a>
-                    <a href="https://soundcloud.com/andrea_merella" target="_blank" class="hover:opacity-100 hover:text-[var(--accent-acid)] transition-colors">SOUNDCLOUD ↗</a>
-                    <a href="https://andreamerella.bandcamp.com/" target="_blank" class="hover:opacity-100 hover:text-[var(--accent-pink)] transition-colors">BANDCAMP ↗</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Dynamic Contact Button -->
-    <button id="build-sticker" onclick="toggleForm()">
-        Let's Build <br> Together
-    </button>
-
-    <!-- ADAPTIVE Bottom Center Social Icons -->
-    <div class="social-dock">
-        <a href="https://www.instagram.com/andrea_dris/" target="_blank" class="hover:text-[var(--accent-acid)] transition-colors">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://x.com/andrea_dris" target="_blank" class="hover:text-[var(--accent-blue)] transition-colors">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-        </a>
-        <a href="https://open.spotify.com/artist/0XPPJdH7cRPxVBSjXfi9iE" target="_blank" class="hover:text-[var(--accent-pink)] transition-colors">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.24 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.02.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.781-.18-.6.18-1.2.78-1.38 4.2-1.26 11.28-1.02 15.721 1.62.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a>
-    </div>
+    <button id="build-sticker" onclick="toggleForm()" onmouseenter="playStickerSound()">Let's Build <br> Together</button>
 
     <div id="contact-modal">
         <div class="modal-bg-click" onclick="toggleForm()"></div>
         <div class="modal-content">
             <button class="close-btn" onclick="toggleForm()">×</button>
             <h2 class="font-['Bungee'] text-3xl mb-2">CONTACT</h2>
-            <p class="font-['Space_Mono'] text-xs opacity-70 mb-8 uppercase">Reach out directly to the hybrid workstation. Leave a message below.</p>
+            <p class="font-['Space_Mono'] text-xs opacity-70 mb-8 uppercase">Got a project in mind or just want to connect? Let's have a chat!</p>
             
             <form>
                 <input type="text" placeholder="NAME // COMPANY" class="w-full bg-transparent border-b-2 border-current py-2 mb-6 font-['Space_Mono'] text-sm outline-none placeholder-current opacity-80">
                 <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b-2 border-current py-2 mb-6 font-['Space_Mono'] text-sm outline-none placeholder-current opacity-80">
                 <textarea placeholder="PROJECT DETAILS // MESSAGE" class="w-full bg-transparent border-b-2 border-current py-2 mb-8 font-['Space_Mono'] text-sm outline-none placeholder-current opacity-80 resize-none" rows="3"></textarea>
-                <button type="button" class="w-full bg-current text-[var(--bg-color)] py-4 font-['Bungee'] text-xl hover:opacity-80 transition-opacity">TRANSMIT</button>
+                <button type="button" class="w-full bg-current text-[var(--bg-color)] py-4 font-['Bungee'] text-xl hover:opacity-80 transition-opacity w-full block text-center mb-8">TRANSMIT</button>
             </form>
-        </div>
-    </div>
 
-    <div class="ticker-tape">
-        <div class="whitespace-nowrap inline-block animate-[scroll_25s_linear_infinite]">
-            +++ SOUND ENGINEER +++ CREATIVE DEVELOPER +++ SYSTEMS ARCHITECT +++ AMSTERDAM +++ SOUND ENGINEER +++ CREATIVE DEVELOPER +++ SYSTEMS ARCHITECT +++ AMSTERDAM +++
+            <div class="flex justify-center gap-6 pt-6 border-t-2 border-current border-opacity-20">
+                <a href="https://www.instagram.com/andrea_dris/" target="_blank" class="hover:text-[var(--accent-acid)] hover:scale-110 transition-all icon-link opacity-60 hover:opacity-100"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                <a href="https://x.com/andrea_dris" target="_blank" class="hover:text-[var(--accent-blue)] hover:scale-110 transition-all icon-link opacity-60 hover:opacity-100"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+            </div>
         </div>
     </div>
-    <style> @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } } </style>
 
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let fxMuted = false;
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+        function toggleFX() {
+            fxMuted = !fxMuted;
+            const btn = document.getElementById('fx-toggle');
+            btn.classList.toggle('muted', fxMuted);
+            btn.innerText = fxMuted ? "FX: OFF" : "FX: ON";
+        }
         
-        // === SOOTHING IGNITION SOUND ===
         function playSoothingBootSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            
-            // C Major 9th Chord for a warm, expansive feel
-            const freqs = [130.81, 196.00, 293.66, 329.63]; 
-            
-            freqs.forEach((f, index) => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                const filter = audioCtx.createBiquadFilter();
-                
-                osc.type = 'sine'; // Pure, calm waveform
-                osc.frequency.value = f;
-                
-                // Warm Lowpass Filter that gently opens up
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(400, audioCtx.currentTime);
-                filter.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 2);
-                
-                // Envelope: Slow 1.5s Attack, Long 4s Release
-                gain.gain.setValueAtTime(0, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5 + (index * 0.2)); 
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5 + (index * 0.5)); 
-                
-                osc.connect(filter);
-                filter.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                osc.start();
-                osc.stop(audioCtx.currentTime + 6);
+            [130.81, 196.00, 293.66, 329.63].forEach((f, index) => {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); const filter = audioCtx.createBiquadFilter();
+                osc.type = 'sine'; osc.frequency.value = f;
+                filter.type = 'lowpass'; filter.frequency.setValueAtTime(400, audioCtx.currentTime); filter.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 2);
+                gain.gain.setValueAtTime(0, audioCtx.currentTime); gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5 + (index * 0.2)); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5 + (index * 0.5)); 
+                osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(); osc.stop(audioCtx.currentTime + 6);
             });
         }
 
-        // === BOOT SEQUENCE LOGIC ===
+        // Fast LFO Wobble (Now assigned to Logo)
+        function playTechLogoWobble() {
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator(); const filter = audioCtx.createBiquadFilter(); const gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.value = 60; 
+            filter.type = 'lowpass'; filter.frequency.setValueAtTime(200, t); filter.frequency.linearRampToValueAtTime(1200, t + 0.05); filter.frequency.linearRampToValueAtTime(200, t + 0.1); filter.frequency.linearRampToValueAtTime(1200, t + 0.15); filter.frequency.linearRampToValueAtTime(200, t + 0.2); filter.frequency.linearRampToValueAtTime(1200, t + 0.25); filter.frequency.linearRampToValueAtTime(200, t + 0.3);
+            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.15, t + 0.02); gain.gain.linearRampToValueAtTime(0.001, t + 0.35);
+            osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.4);
+        }
+
+        function playLogoSound(mode) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (fxMuted) return;
+            const t = audioCtx.currentTime;
+            
+            if (mode.includes('mode-tech')) {
+                playTechLogoWobble();
+            } else if (mode.includes('mode-loud')) {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.setValueAtTime(440, t); osc.frequency.exponentialRampToValueAtTime(880, t + 0.1); 
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.3, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.35);
+            } else if (mode.includes('mode-sleek')) {
+                [1046.50, 1318.51, 1567.98, 2093.00].forEach((f, i) => {
+                    const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                    osc.type = 'sine'; osc.frequency.value = f;
+                    const delay = i * 0.08; 
+                    gain.gain.setValueAtTime(0, t + delay); gain.gain.linearRampToValueAtTime(0.05, t + delay + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + delay + 1.5); 
+                    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t + delay); osc.stop(t + delay + 1.6);
+                });
+            }
+        }
+
         const bootTrigger = document.getElementById('boot-trigger');
         bootTrigger.addEventListener('click', function() {
-            if (!document.body.classList.contains('standby')) return; // Prevent re-trigger
-            
-            playSoothingBootSound();
-            
-            // Remove standby class to trigger CSS cascade
-            document.body.classList.remove('standby');
-            
-            // Stop the pulsing animation
-            this.querySelector('.logo-text').style.animation = 'none';
-            this.querySelector('.copyright-text').style.opacity = '0.6';
-            
-            // Allow scrolling after elements settle
-            setTimeout(() => { document.body.style.overflow = ''; }, 1500);
-        });
-
-        // === GRID OPTIMIZATION ===
-        const grid = document.getElementById('interactive-grid');
-        for (let i = 0; i < 600; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'grid-cell';
-            grid.appendChild(cell);
-        }
-        grid.addEventListener('mouseover', (e) => {
-            if (e.target.classList.contains('grid-cell')) {
-                e.target.classList.add('active');
-                setTimeout(() => e.target.classList.remove('active'), 500);
-            }
-        });
-
-        let activeContainer = null;
-        const uploader = document.getElementById('mediaUploader');
-
-        function handleProjectClick(container, event) {
-            event.preventDefault(); 
-            activeContainer = container;
-            uploader.click();
-        }
-
-        uploader.addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                const target = activeContainer.querySelector('.media-target');
-                
-                reader.onload = function(e) { 
-                    if (file.type.startsWith('video/')) {
-                        target.innerHTML = `<video src="${e.target.result}" class="img-fit" autoplay loop muted playsinline></video>`;
-                    } else {
-                        target.innerHTML = `<img src="${e.target.result}" class="img-fit">`;
-                    }
+            if (document.body.classList.contains('standby')) {
+                playSoothingBootSound();
+                document.body.classList.remove('standby');
+                this.querySelector('.copyright-text').style.opacity = '0.6';
+                setTimeout(() => { document.body.style.overflow = ''; }, 1500);
+            } else {
+                const logoText = this.querySelector('.logo-text');
+                logoText.style.animation = 'none'; void logoText.offsetWidth; 
+                if (document.body.classList.contains('mode-loud')) {
+                    logoText.style.animation = 'mtv-smash 0.5s ease-in-out';
+                    logoText.style.color = ['var(--accent-pink)', 'var(--accent-acid)', 'var(--accent-blue)', 'inherit'][Math.floor(Math.random() * 4)];
+                } else if (document.body.classList.contains('mode-tech')) {
+                    logoText.style.color = 'inherit'; logoText.style.animation = 'tech-shake 0.3s linear';
+                } else if (document.body.classList.contains('mode-sleek')) {
+                    logoText.style.color = 'inherit'; logoText.style.animation = 'sleek-bounce 0.6s cubic-bezier(0.19, 1, 0.22, 1), sleek-shine 0.6s ease-in-out';
                 }
-                reader.readAsDataURL(file);
+                playLogoSound(document.body.className); 
             }
-            e.target.value = '';
         });
 
-        // === CURSOR ENGINE ===
+        // === GRID ===
+        const grid = document.getElementById('interactive-grid');
+        for (let i = 0; i < 400; i++) { const cell = document.createElement('div'); cell.className = 'grid-cell'; grid.appendChild(cell); }
+        if (!isTouch) {
+            grid.addEventListener('mouseover', (e) => {
+                if (e.target.classList.contains('grid-cell')) {
+                    e.target.classList.add('active'); setTimeout(() => e.target.classList.remove('active'), 500);
+                }
+            });
+        }
+
+        // === ZERO-LAG GPU CURSOR ===
         const cursor = document.getElementById('custom-cursor');
         const trails = [document.getElementById('trail-1'), document.getElementById('trail-2')];
-        let mX = 0, mY = 0, tX = [0, 0], tY = [0, 0];
-        
-        document.addEventListener('mousemove', (e) => { 
-            mX = e.clientX; mY = e.clientY; 
-            cursor.style.left = mX + 'px'; cursor.style.top = mY + 'px'; 
-        });
-        
-        function animate() {
-            tX[0] += (mX - tX[0]) * 0.2; tY[0] += (mY - tY[0]) * 0.2;
-            tX[1] += (tX[0] - tX[1]) * 0.2; tY[1] += (tY[0] - tY[1]) * 0.2;
-            trails.forEach((t, i) => { t.style.left = tX[i] + 'px'; t.style.top = tY[i] + 'px'; });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        const interactables = document.querySelectorAll('a, button, .project-block, .audio-header, input, textarea, .img-wrap, .close-btn, #boot-trigger');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-        });
-
-        function toggleAudio(id) {
-            const targetPanel = document.getElementById('panel-' + id);
-            if (targetPanel.classList.contains('open')) { 
-                targetPanel.classList.remove('open');
-            } else { 
-                targetPanel.classList.add('open');
+        let mX = -100, mY = -100, tX = [-100, -100], tY = [-100, -100];
+        if (!isTouch) {
+            document.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; });
+            function animateCursor() {
+                cursor.style.transform = `translate3d(${mX}px, ${mY}px, 0) translate(-50%, -50%) ${cursor.classList.contains('hovering') ? (document.body.classList.contains('mode-loud') ? 'scale(1.8)' : document.body.classList.contains('mode-tech') ? 'scale(1.6)' : 'scale(1.8)') : (document.body.classList.contains('mode-sleek') ? 'scale(0.8)' : 'scale(1)')}`;
+                tX[0] += (mX - tX[0]) * 0.2; tY[0] += (mY - tY[0]) * 0.2; tX[1] += (tX[0] - tX[1]) * 0.2; tY[1] += (tY[0] - tY[1]) * 0.2;
+                trails.forEach((t, i) => { t.style.transform = `translate3d(${tX[i]}px, ${tY[i]}px, 0) translate(-50%, -50%)`; });
+                requestAnimationFrame(animateCursor);
             }
+            animateCursor();
+            const interactables = document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn), .audio-header, .project-block');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            });
         }
 
-        function toggleForm() {
-            const modal = document.getElementById('contact-modal');
-            modal.classList.toggle('active');
-        }
+        function toggleAudio(id) { document.getElementById('panel-' + id).classList.toggle('open'); }
+        function toggleForm() { document.getElementById('contact-modal').classList.toggle('active'); }
 
+        // === WARM, COMFY HARMONICS + ZERO DISTORTION TRANSIENT ===
         const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
         let nIdx = 0, dir = 1;
 
         function playSound() {
-            if (document.body.classList.contains('standby')) return; // No hover sounds during standby
+            if (document.body.classList.contains('standby') || fxMuted) return; 
             if (audioCtx.state === 'suspended') audioCtx.resume();
             
-            const mode = document.body.className;
             nIdx += dir; if (nIdx >= scale.length - 1 || nIdx <= 0) dir *= -1;
-            const f = scale[nIdx];
+            const f = scale[nIdx]; 
             const gain = audioCtx.createGain();
-            
+            const mode = document.body.className;
+            const t = audioCtx.currentTime;
+
+            const snapOsc = audioCtx.createOscillator(); const snapGain = audioCtx.createGain();
+            snapOsc.type = 'sine'; snapOsc.frequency.setValueAtTime(f * 2, t); snapOsc.frequency.exponentialRampToValueAtTime(f, t + 0.03); 
+            snapGain.gain.setValueAtTime(0, t); snapGain.gain.linearRampToValueAtTime(0.1, t + 0.01); snapGain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+            snapOsc.connect(snapGain); snapGain.connect(audioCtx.destination); snapOsc.start(t); snapOsc.stop(t + 0.15);
+
             if (mode.includes('mode-loud')) {
-                const osc = audioCtx.createOscillator();
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(f, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+                const osc = audioCtx.createOscillator(); osc.type = 'triangle'; osc.frequency.setValueAtTime(f, t);
+                const sub = audioCtx.createOscillator(); sub.type = 'sine'; sub.frequency.setValueAtTime(f / 2, t);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.06, t + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6); 
+                osc.connect(gain); sub.connect(gain); gain.connect(audioCtx.destination); 
+                osc.start(t); sub.start(t); osc.stop(t + 0.65); sub.stop(t + 0.65);
             } else if (mode.includes('mode-tech')) {
-                const osc = audioCtx.createOscillator();
-                osc.type = 'square'; osc.frequency.setValueAtTime(f * 2, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+                const osc = audioCtx.createOscillator(); osc.type = 'square'; osc.frequency.setValueAtTime(f, t);
+                const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(f * 1.5, t); 
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.02, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
+                
+                // Metallic Multitap Delay Network
+                const delay = audioCtx.createDelay(); delay.delayTime.value = 0.05; 
+                const fb = audioCtx.createGain(); fb.gain.value = 0.35;
+                delay.connect(fb); fb.connect(delay); delay.connect(audioCtx.destination);
+
+                osc.connect(filter); filter.connect(gain); 
+                gain.connect(audioCtx.destination); gain.connect(delay); // Route to delay
+                
+                osc.start(t); osc.stop(t + 0.45);
             } else {
-                gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
-                [1, 1.5, 2].forEach(m => {
-                    const osc = audioCtx.createOscillator();
-                    osc.type = 'sine'; osc.frequency.value = f * m;
-                    osc.connect(gain); osc.start(); osc.stop(audioCtx.currentTime + 1.2);
-                });
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.03, t + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + 1.2);
+                [1, 1.5, 2].forEach(m => { const osc = audioCtx.createOscillator(); osc.type = 'sine'; osc.frequency.value = f * m; osc.connect(gain); osc.start(t); osc.stop(t + 1.2); });
                 gain.connect(audioCtx.destination);
             }
         }
 
-        function setMode(cls, btn) {
-            document.body.className = cls;
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const gridEl = document.getElementById('interactive-grid');
-            const stickerBtn = document.getElementById('build-sticker');
-
-            if (cls === 'mode-sleek') {
-                gridEl.style.display = 'none';
-                stickerBtn.innerHTML = "Contact Me";
-            } else if (cls === 'mode-tech') {
-                gridEl.style.display = 'none';
-                stickerBtn.innerHTML = "INIT_COMMS //";
-            } else {
-                gridEl.style.display = 'grid';
-                stickerBtn.innerHTML = "Let's Build <br> Together";
-            }
-            
-            playSound();
+        // --- SPECIFIC TEXT HOVER SYNTHS ---
+        
+        function playLoudBoing() {
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.type = 'sine'; osc.frequency.setValueAtTime(150, t); osc.frequency.exponentialRampToValueAtTime(600, t + 0.15); 
+            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.4, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.45);
         }
 
-        document.querySelectorAll('a, button, .audio-header, .project-block').forEach(n => n.addEventListener('mouseenter', playSound));
+        function playLoudPing() {
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.type = 'sine'; osc.frequency.setValueAtTime(1200, t); osc.frequency.exponentialRampToValueAtTime(600, t + 0.1); 
+            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.3, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3); 
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.35);
+        }
 
-        // === CUSTOM AUDIO PLAYER LOGIC ===
+        // Deep Sub Wobble (Now assigned to Sound)
+        function playTechSoundWobble() {
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator(); const filter = audioCtx.createBiquadFilter(); const gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.value = 40; 
+            filter.type = 'lowpass'; 
+            filter.frequency.setValueAtTime(100, t); filter.frequency.linearRampToValueAtTime(800, t + 0.2); filter.frequency.linearRampToValueAtTime(100, t + 0.5); filter.frequency.linearRampToValueAtTime(800, t + 0.8); filter.frequency.linearRampToValueAtTime(100, t + 1.0);
+            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.2, t + 0.05); gain.gain.linearRampToValueAtTime(0.001, t + 1.1);
+            osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); 
+            osc.start(t); osc.stop(t + 1.15);
+        }
+
+        function playTechSystemWobble() {
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator(); const filter = audioCtx.createBiquadFilter(); const gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.value = 65; 
+            filter.type = 'lowpass'; filter.frequency.setValueAtTime(150, t); filter.frequency.linearRampToValueAtTime(1000, t + 0.1); filter.frequency.linearRampToValueAtTime(150, t + 0.2); filter.frequency.linearRampToValueAtTime(1000, t + 0.3); filter.frequency.linearRampToValueAtTime(150, t + 0.4);
+            gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.15, t + 0.02); gain.gain.linearRampToValueAtTime(0.001, t + 0.45);
+            osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.5);
+        }
+
+        function playSleekCrystal() {
+            const t = audioCtx.currentTime;
+            [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => { 
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.value = f;
+                gain.gain.setValueAtTime(0, t + (i * 0.05)); gain.gain.linearRampToValueAtTime(0.04, t + (i * 0.05) + 0.1); gain.gain.exponentialRampToValueAtTime(0.001, t + (i * 0.05) + 2.0); 
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t + (i * 0.05)); osc.stop(t + (i * 0.05) + 2.1);
+            });
+        }
+
+        function playSleekPluck() {
+            const t = audioCtx.currentTime;
+            [880, 1318.51].forEach((f, i) => { 
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.value = f;
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.08, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4); 
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.45);
+            });
+        }
+
+        // Music Player Dock Custom Hover Reveal Sound
+        function playPlayerHoverSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (fxMuted || document.body.classList.contains('standby')) return;
+            const t = audioCtx.currentTime;
+
+            // Transiet Pop
+            const snapOsc = audioCtx.createOscillator(); const snapGain = audioCtx.createGain();
+            snapOsc.type = 'sine'; snapOsc.frequency.setValueAtTime(800, t); snapOsc.frequency.exponentialRampToValueAtTime(400, t + 0.05);
+            snapGain.gain.setValueAtTime(0, t); snapGain.gain.linearRampToValueAtTime(0.1, t + 0.01); snapGain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+            snapOsc.connect(snapGain); snapGain.connect(audioCtx.destination); snapOsc.start(t); snapOsc.stop(t + 0.15);
+
+            // Calming Ascending Arpeggio
+            [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.value = f;
+                const startTime = t + (i * 0.06);
+                gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(0.05, startTime + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.0);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(startTime); osc.stop(startTime + 1.1);
+            });
+        }
+        document.querySelector('.audio-card').addEventListener('mouseenter', playPlayerHoverSound);
+
+        // --- MASTER HIGHLIGHT ROUTING ---
+        function triggerHighlightLogic(targetStr) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            if (targetStr === 'sound') {
+                const dock = document.getElementById('music-player-card');
+                dock.style.transform = 'translateY(-8px)';
+                setTimeout(() => dock.style.transform = 'translateY(0)', 150);
+            }
+
+            if (fxMuted) return;
+            const mode = document.body.className;
+
+            if (mode.includes('mode-tech')) {
+                if (targetStr === 'sound') playTechSoundWobble();
+                else playTechSystemWobble();
+            } else if (mode.includes('mode-sleek')) {
+                if (targetStr === 'sound') playSleekCrystal();
+                else playSleekPluck();
+            } else { // Loud
+                if (targetStr === 'sound') playLoudBoing();
+                else playLoudPing();
+            }
+        }
+
+        document.querySelector('.loud-highlight').addEventListener('mouseenter', () => triggerHighlightLogic('sound'));
+        document.querySelector('.tech-highlight').addEventListener('mouseenter', () => triggerHighlightLogic('systems'));
+
+        // Bespoke Sticker Sounds
+        function playStickerSound() {
+            if (document.body.classList.contains('standby') || fxMuted) return; 
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const mode = document.body.className;
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+
+            if (mode.includes('mode-loud')) {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(800, t + 0.1);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.3, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.25);
+            } else if (mode.includes('mode-tech')) {
+                osc.type = 'square'; osc.frequency.setValueAtTime(800, t); osc.frequency.setValueAtTime(1200, t + 0.05);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.05, t + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t + 0.15);
+            } else {
+                [1046.50 * 2, 1318.51 * 2].forEach((f, i) => { 
+                    const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                    osc.type = 'sine'; osc.frequency.value = f;
+                    gain.gain.setValueAtTime(0, t + (i*0.05)); gain.gain.linearRampToValueAtTime(0.05, t + (i*0.05) + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, t + (i*0.05) + 1.0);
+                    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t + (i*0.05)); osc.stop(t + (i*0.05) + 1.1);
+                });
+            }
+        }
+
+        function playModeSwitchSound(modeClass) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (fxMuted) return;
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            gain.connect(audioCtx.destination);
+
+            if (modeClass === 'mode-loud') {
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(120, t); osc.frequency.exponentialRampToValueAtTime(50, t + 0.3); 
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.2, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+                osc.connect(gain); osc.start(t); osc.stop(t + 0.4);
+            } else if (modeClass === 'mode-tech') {
+                osc.type = 'square'; const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(200, t); filter.frequency.linearRampToValueAtTime(1000, t + 0.1); filter.frequency.linearRampToValueAtTime(200, t + 0.2); 
+                osc.frequency.setValueAtTime(55, t); 
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.1, t + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+                osc.connect(filter); filter.connect(gain); osc.start(t); osc.stop(t + 0.35);
+            } else if (modeClass === 'mode-sleek') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(880, t); osc.frequency.linearRampToValueAtTime(1760, t + 0.4);
+                gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.1, t + 0.2); gain.gain.linearRampToValueAtTime(0.001, t + 0.6);
+                osc.connect(gain); osc.start(t); osc.stop(t + 0.65);
+            }
+        }
+
+        document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn):not(.mode-btn):not(#build-sticker), .audio-header, .project-block').forEach(n => n.addEventListener('mouseenter', playSound));
+
+        function setMode(cls, btn) {
+            if(document.body.className.includes(cls)) return; 
+            document.body.className = cls;
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+            document.getElementById('interactive-grid').style.display = (cls === 'mode-loud') ? 'grid' : 'none';
+            document.getElementById('build-sticker').innerHTML = (cls === 'mode-sleek') ? "Contact Me" : (cls === 'mode-tech') ? "INIT_COMMS //" : "Let's Build <br> Together";
+            if(cls !== 'mode-loud') document.querySelector('.logo-text').style.color = 'inherit';
+            playModeSwitchSound(cls);
+        }
+
+        // === MULTI-TRACK AUDIO PLAYER ===
         const nativeAudio = document.getElementById('native-audio');
         const playBtn = document.getElementById('custom-play-btn');
-        const iconPlay = document.getElementById('icon-play');
-        const iconPause = document.getElementById('icon-pause');
         const progContainer = document.getElementById('custom-progress-container');
         const progBar = document.getElementById('custom-progress-bar');
         const timeDisp = document.getElementById('track-time');
+        const titleDisp = document.getElementById('track-title');
+        const playerCard = document.getElementById('music-player-card');
 
-        function formatTime(seconds) {
-            const m = Math.floor(seconds / 60);
-            const s = Math.floor(seconds % 60);
-            return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+        const playlist = [
+            { title: "01_SYSTEM.WAV", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+            { title: "02_NETWORK.WAV", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+            { title: "03_SYNTHESIS.WAV", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
+        ];
+        let currentTrack = 0;
+
+        function loadTrack(index) {
+            nativeAudio.src = playlist[index].src; titleDisp.innerText = playlist[index].title; nativeAudio.load();
         }
+        loadTrack(currentTrack);
 
         function toggleCustomPlayer() {
             if (nativeAudio.paused) {
-                nativeAudio.play();
-                iconPlay.classList.add('hidden');
-                iconPause.classList.remove('hidden');
+                nativeAudio.play(); document.getElementById('icon-play').classList.add('hidden'); document.getElementById('icon-pause').classList.remove('hidden'); playerCard.classList.add('playing'); 
             } else {
-                nativeAudio.pause();
-                iconPlay.classList.remove('hidden');
-                iconPause.classList.add('hidden');
+                nativeAudio.pause(); document.getElementById('icon-play').classList.remove('hidden'); document.getElementById('icon-pause').classList.add('hidden'); playerCard.classList.remove('playing'); 
             }
         }
 
+        function skipTrack(direction = 1) {
+            currentTrack = (currentTrack + direction + playlist.length) % playlist.length; loadTrack(currentTrack); toggleCustomPlayer();
+        }
+
         playBtn.addEventListener('click', toggleCustomPlayer);
+        nativeAudio.addEventListener('ended', () => skipTrack(1));
 
         nativeAudio.addEventListener('timeupdate', () => {
-            const percent = (nativeAudio.currentTime / nativeAudio.duration) * 100;
-            progBar.style.width = `${percent}%`;
-            timeDisp.innerText = formatTime(nativeAudio.currentTime);
+            if(isNaN(nativeAudio.duration)) return;
+            progBar.style.width = `${(nativeAudio.currentTime / nativeAudio.duration) * 100}%`;
+            const m = Math.floor(nativeAudio.currentTime / 60); const s = Math.floor(nativeAudio.currentTime % 60);
+            timeDisp.innerText = (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         });
 
         progContainer.addEventListener('click', (e) => {
-            const rect = progContainer.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            nativeAudio.currentTime = pos * nativeAudio.duration;
+            const rect = progContainer.getBoundingClientRect(); nativeAudio.currentTime = ((e.clientX - rect.left) / rect.width) * nativeAudio.duration;
         });
 
-        // === ACOUSTIC CLAP TRIGGER ===
-        let isListening = false;
-        let micStream = null;
-        let analyser = null;
-        let microphone = null;
-        let clapThreshold = 0.8; 
+        // === COMMAND CENTER ===
+        let isListening = false; let micStream = null; let clapThreshold = 0.35; let speechRecog = null;
 
-        async function toggleClapSensor() {
+        async function toggleVoiceAndClap() {
             const btn = document.getElementById('mic-trigger');
-            
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { alert("Microphone API not supported in this browser."); return; }
             if (isListening) {
                 if (micStream) micStream.getTracks().forEach(track => track.stop());
-                btn.classList.remove('listening');
-                isListening = false;
-                return;
+                if (speechRecog) speechRecog.stop();
+                btn.classList.remove('listening'); btn.querySelector('span').innerText = "CMD: OFF"; isListening = false; return;
             }
-
             try {
+                nativeAudio.play().then(() => { nativeAudio.pause(); }).catch(e => console.log("Unlock pending"));
                 micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 if (audioCtx.state === 'suspended') audioCtx.resume();
-                
-                analyser = audioCtx.createAnalyser();
-                microphone = audioCtx.createMediaStreamSource(micStream);
-                microphone.connect(analyser);
-                analyser.fftSize = 256;
-                
-                const bufferLength = analyser.frequencyBinCount;
-                const dataArray = new Uint8Array(bufferLength);
-                
-                btn.classList.add('listening');
-                isListening = true;
+                btn.classList.add('listening'); btn.querySelector('span').innerText = "CMD: ON"; isListening = true;
+                if (!document.getElementById('panel-main').classList.contains('open')) document.getElementById('panel-main').classList.add('open');
 
-                const targetPanel = document.getElementById('panel-main');
-                if (!targetPanel.classList.contains('open')) {
-                    targetPanel.classList.add('open');
-                }
+                const analyser = audioCtx.createAnalyser(); const microphone = audioCtx.createMediaStreamSource(micStream);
+                microphone.connect(analyser); analyser.fftSize = 256; const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
+                let lastClap = 0;
                 function detectClap() {
                     if (!isListening) return;
-                    
-                    analyser.getByteTimeDomainData(dataArray);
-                    let maxVolume = 0;
-                    
-                    for (let i = 0; i < bufferLength; i++) {
-                        let normalized = (dataArray[i] / 128.0) - 1.0;
-                        let absVal = Math.abs(normalized);
-                        if (absVal > maxVolume) maxVolume = absVal;
+                    analyser.getByteTimeDomainData(dataArray); let maxVolume = 0;
+                    for (let i = 0; i < analyser.frequencyBinCount; i++) {
+                        let absVal = Math.abs((dataArray[i] / 128.0) - 1.0); if (absVal > maxVolume) maxVolume = absVal;
                     }
-                    
-                    if (maxVolume > clapThreshold) {
-                        if (nativeAudio.paused) toggleCustomPlayer();
-                        
-                        isListening = false;
-                        btn.classList.remove('listening');
-                        setTimeout(() => {
-                            if (micStream) micStream.getTracks().forEach(track => track.stop());
-                        }, 500);
-                        return;
-                    }
-                    
+                    const now = Date.now();
+                    if (maxVolume > clapThreshold && (now - lastClap > 1000)) { lastClap = now; toggleCustomPlayer(); }
                     requestAnimationFrame(detectClap);
                 }
-                
                 detectClap();
-                
-            } catch (err) {
-                console.error("Microphone access denied:", err);
-                alert("Microphone access is required to use the clap sensor.");
-            }
+
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                if (SpeechRecognition) {
+                    speechRecog = new SpeechRecognition(); speechRecog.continuous = true; speechRecog.interimResults = false;
+                    speechRecog.onresult = (event) => {
+                        const command = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
+                        if (command.includes('music') || command.includes('play') || command.includes('stop') || command.includes('pause')) { toggleCustomPlayer(); }
+                        else if (command.includes('next')) { skipTrack(1); } else if (command.includes('previous') || command.includes('back')) { skipTrack(-1); }
+                        else if (command.includes('vanguard')) { document.getElementById('link-vanguard').click(); } else if (command.includes('sdrocer') || command.includes('vinyl')) { document.getElementById('link-sdrocer').click(); }
+                        else if (command.includes('mattie') || command.includes('web 3')) { document.getElementById('link-mattie').click(); } else if (command.includes('explorer') || command.includes('amsterdam')) { document.getElementById('link-explorer').click(); }
+                        else if (command.includes('heavy marine') || command.includes('circular')) { document.getElementById('link-heavy-marine').click(); } else if (command.includes('dris') || command.includes('lab')) { document.getElementById('link-dris-lab').click(); }
+                    };
+                    speechRecog.onend = () => { if (isListening) speechRecog.start(); }; speechRecog.start();
+                }
+            } catch (err) { console.error("Microphone access denied:", err); alert("Microphone access is required for Voice/Clap commands."); }
         }
     </script>
 </body>
