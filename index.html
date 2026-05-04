@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ANDREA MERELLA // PORTFOLIO</title>
+
+    <!-- Social / OG preview — shows the AM. landing page, not a project image -->
+    <meta property="og:title" content="ANDREA MERELLA // PORTFOLIO">
+    <meta property="og:description" content="Audio Specialist and Creative Developer based in Amsterdam. Sound, systems, and high-voltage digital experiences.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreamerella.github.io/portfolio/">
+    <meta property="og:image" content="https://andreamerella.github.io/portfolio/assets/images/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ANDREA MERELLA // PORTFOLIO">
+    <meta name="twitter:description" content="Audio Specialist and Creative Developer based in Amsterdam.">
+    <meta name="twitter:image" content="https://andreamerella.github.io/portfolio/assets/images/og-preview.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&display=swap" rel="stylesheet">
 
@@ -204,13 +218,9 @@
         /* === GRID ARCHITECTURE === */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3.5rem 2.5rem; padding: 0 4rem 8rem 4rem; max-width: 1800px; margin: 0 auto; position: relative; z-index: 10; }
         .project-block { display: flex; flex-direction: column; position: relative; }
-        .img-wrap { height: 260px; position: relative; width: 100%; overflow: hidden; cursor: crosshair; }
+        .img-wrap { height: 260px; position: relative; width: 100%; overflow: hidden; }
         .media-target { width: 100%; height: 100%; }
         .img-fit { width: 100%; height: 100%; object-fit: cover; }
-        .img-wrap::after { content: 'SWAP MEDIA'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--accent-acid); color: #000; border: 2px solid #000; padding: 6px 14px; font-family: var(--font-sub); font-size: 11px; font-weight: bold; opacity: 0; transition: 0.3s; z-index: 20; pointer-events: none; }
-        .mode-tech .img-wrap::after { background: #000; color: #00ff41; border-color: #00ff41; }
-        .mode-sleek .img-wrap::after { background: #fff; color: #000; border: none; border-radius: 50px; }
-        .img-wrap:hover::after { opacity: 1; }
 
         /* === AUDIO PLAYER DOCK === */
         #audio-hub { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 8500; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -329,6 +339,12 @@
             section { padding-top: 8rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
             h1 { font-size: 2.75rem !important; line-height: 1 !important; }
 
+            /* Copyright text: tracking-widest is too wide on small screens */
+            .copyright-text { letter-spacing: 0.06em !important; font-size: 9px !important; }
+
+            /* Project titles: prevent long names (e.g. HEAVY MARINE UTILITY) from overflowing */
+            .project-title { font-size: 1.5rem !important; line-height: 1.1 !important; word-break: break-word; }
+
             .modal-content { padding: 2.5rem 1.5rem 2rem 1.5rem; margin: 0 1rem; }
         }
 
@@ -342,7 +358,6 @@
 </head>
 <body class="mode-loud standby" id="portfolio-body">
 
-    <input type="file" id="mediaUploader" accept="image/*,video/mp4,video/webm,video/quicktime" style="display: none;">
     <div id="interactive-grid"></div>
 
     <div id="custom-cursor"></div>
@@ -375,7 +390,7 @@
         <!-- VNGRD -->
         <div class="project-block group" id="proj-vanguard">
             <span class="project-sticker bg-white">HYBRID WORKSTATION</span>
-            <div class="img-wrap" onclick="handleProjectClick(this, event)">
+            <div class="img-wrap">
                 <div class="media-target w-full h-full">
                     <video src="assets/images/vngrd.mp4" class="img-fit" autoplay loop muted playsinline></video>
                 </div>
@@ -392,7 +407,7 @@
         <!-- SDROCER -->
         <div class="project-block group" id="proj-sdrocer">
             <span class="project-sticker bg-lime-400">VINYL DIGGER</span>
-            <div class="img-wrap" style="background: radial-gradient(circle at 50% 50%, #2a2a2a 28%, #111 30%, #1e1e1e 32%, #111 48%, #1e1e1e 50%, #111 65%, #1e1e1e 67%, #0a0a0a 100%);" onclick="handleProjectClick(this, event)">
+            <div class="img-wrap" style="background: radial-gradient(circle at 50% 50%, #2a2a2a 28%, #111 30%, #1e1e1e 32%, #111 48%, #1e1e1e 50%, #111 65%, #1e1e1e 67%, #0a0a0a 100%);">
                 <div class="media-target w-full h-full">
                     <video src="assets/images/sdrocer-demo.mov" class="img-fit" autoplay loop muted playsinline style="mix-blend-mode: lighten;"></video>
                 </div>
@@ -409,7 +424,7 @@
         <!-- MATTIE / WEB3 -->
         <div class="project-block group" id="proj-mattie">
             <span class="project-sticker bg-pink-500 text-white">WEB3 PLATFORM</span>
-            <div class="img-wrap" onclick="handleProjectClick(this, event)">
+            <div class="img-wrap">
                 <div class="media-target w-full h-full">
                     <img src="assets/images/mattie-web3.jpg" class="img-fit" alt="MATTIE / WEB3">
                 </div>
@@ -426,7 +441,7 @@
         <!-- EXPLORER -->
         <div class="project-block group" id="proj-explorer">
             <span class="project-sticker bg-blue-500 text-white">GEODATA</span>
-            <div class="img-wrap" onclick="handleProjectClick(this, event)">
+            <div class="img-wrap">
                 <div class="media-target w-full h-full">
                     <img src="assets/images/amsterdam-explorer-cover.png" class="img-fit" alt="Amsterdam Explorer">
                 </div>
@@ -436,14 +451,14 @@
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">EXPLORER</h2>
                     <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">An interactive, educational Progressive Web App (PWA) designed to help kids navigate and map the urban soundscape of Amsterdam.</p>
                 </div>
-                <div><a href="#" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://andreamerella.github.io/AmsterdamExplorer/index.html" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
         <!-- HEAVY MARINE UTILITY -->
         <div class="project-block group" id="proj-heavy-marine">
             <span class="project-sticker bg-yellow-400">CIRCULAR ECONOMY</span>
-            <div class="img-wrap" onclick="handleProjectClick(this, event)">
+            <div class="img-wrap">
                 <div class="media-target w-full h-full">
                     <img src="assets/images/hmu-pic2.png" class="img-fit" alt="Heavy Marine Utility"
                          onerror="this.src='assets/images/hmu-logo.png'">
@@ -461,7 +476,7 @@
         <!-- DRIS_LAB -->
         <div class="project-block group" id="proj-dris-lab">
             <span class="project-sticker bg-cyan-400">AUDIO/VISUAL</span>
-            <div class="img-wrap" onclick="handleProjectClick(this, event)">
+            <div class="img-wrap">
                 <div class="media-target w-full h-full">
                     <img src="assets/images/drislab.png" class="img-fit" alt="DRIS_LAB">
                 </div>
@@ -705,31 +720,6 @@
 
         function toggleAudio(id) { document.getElementById('panel-' + id).classList.toggle('open'); }
         function toggleForm() { document.getElementById('contact-modal').classList.toggle('active'); }
-
-        // Media swap: click project image to toggle video play/pause or trigger upload
-        function handleProjectClick(wrap, event) {
-            event.stopPropagation();
-            const video = wrap.querySelector('video');
-            if (video) {
-                if (video.paused) { video.play(); } else { video.pause(); }
-                return;
-            }
-            // For static images: trigger file upload to swap media
-            const uploader = document.getElementById('mediaUploader');
-            uploader.onchange = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const url = URL.createObjectURL(file);
-                const mt = wrap.querySelector('.media-target');
-                if (file.type.startsWith('video/')) {
-                    mt.innerHTML = `<video src="${url}" class="img-fit" autoplay loop muted playsinline></video>`;
-                } else {
-                    mt.innerHTML = `<img src="${url}" class="img-fit">`;
-                }
-                uploader.value = '';
-            };
-            uploader.click();
-        }
 
         const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
         let nIdx = 0, dir = 1;
