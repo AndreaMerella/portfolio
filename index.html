@@ -41,7 +41,7 @@
             transition: background-color 0.8s ease, color 0.8s ease;
             overflow-x: hidden; margin: 0; padding: 0; position: relative; cursor: none;
             -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
-            min-height: 100dvh;
+            min-height: 100dvh; overscroll-behavior: none;
         }
 
         img, video { pointer-events: none; -webkit-user-drag: none; display: block; }
@@ -332,25 +332,33 @@
             #custom-progress-container { min-width: 60px !important; }
             .icon-link { display: flex !important; }
 
-            #build-sticker { bottom: 5.75rem; right: 1rem; font-size: 10px; padding: 0.6rem 0.85rem; transform: rotate(-2deg); }
+            /* Move "Let's Build" sticker to top-right so it never overlaps the bottom audio player */
+            #build-sticker {
+                top: 4.5rem;
+                right: 0.75rem;
+                bottom: auto;
+                font-size: 10px;
+                padding: 0.5rem 0.75rem;
+                transform: rotate(-2deg);
+            }
 
-            .project-grid { padding: 0 1.25rem 6rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
+            /* No blank tail — tighten section bottom padding and grid bottom padding */
+            .project-grid { padding: 0 1.25rem 4rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
 
-            section { padding-top: 13rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+            section { padding-top: 13rem !important; padding-bottom: 1rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
             h1 { font-size: 2.75rem !important; line-height: 1 !important; }
 
             /* Copyright text: tracking-widest is too wide on small screens */
             .copyright-text { letter-spacing: 0.06em !important; font-size: 9px !important; }
 
-            /* Project titles: prevent long names (e.g. HEAVY MARINE UTILITY) from overflowing */
-            .project-title { font-size: 1.5rem !important; line-height: 1.1 !important; word-break: break-word; }
+            /* Project titles — raise line-height so Bungee ascenders/descenders aren't clipped */
+            .project-title { font-size: 1.5rem !important; line-height: 1.35 !important; word-break: break-word; overflow: visible; }
 
             .modal-content { padding: 2.5rem 1.5rem 2rem 1.5rem; margin: 0 1rem; }
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 2.25rem !important; }
-            #build-sticker { bottom: 5.5rem; right: 0.75rem; }
             /* Hide contact/social icon-links at this breakpoint */
             .icon-link { display: none !important; }
             /* But keep Spotify / SoundCloud / Bandcamp visible in the music player */
