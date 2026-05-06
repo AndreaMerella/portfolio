@@ -272,10 +272,10 @@
         .mode-sleek #build-sticker { background: #000; color: #fff; border-color: #000; border-radius: 50px; padding: 1rem 2rem; transform: none; font-family: var(--font-sub); font-size: 12px; }
         .mode-sleek #build-sticker:hover { background: var(--accent-blue); border-color: var(--accent-blue); transform: translateY(-3px); }
 
-        #contact-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 30000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        #contact-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
         #contact-modal.active { opacity: 1; pointer-events: auto; }
         .modal-bg-click { position: absolute; inset: 0; cursor: pointer; }
-        .modal-content { background: var(--bg-color); color: var(--text-color); width: 100%; max-width: 500px; padding: 3.5rem 3rem 3rem 3rem; position: relative; border: 2px solid var(--text-color); transform: translateY(20px); transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); z-index: 30001; }
+        .modal-content { background: var(--bg-color); color: var(--text-color); width: 100%; max-width: 500px; padding: 3.5rem 3rem 3rem 3rem; position: relative; border: 2px solid var(--text-color); transform: translateY(20px); transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); z-index: 200001; }
         #contact-modal.active .modal-content { transform: translateY(0); }
         .close-btn { position: absolute; top: 1rem; right: 1.5rem; font-family: var(--font-sub); font-weight: bold; font-size: 1.5rem; background: transparent; border: none; color: inherit; z-index: 30002; transition: opacity 0.2s; cursor: pointer; }
         .close-btn:hover { opacity: 0.5; transform: scale(1.2); }
@@ -353,6 +353,8 @@
 
             /* Project titles — raise line-height so Bungee ascenders/descenders aren't clipped */
             .project-title { font-size: 1.5rem !important; line-height: 1.35 !important; word-break: break-word; overflow: visible; }
+            /* Let project content grow to fit multi-line titles instead of fixed 210px */
+            .project-content { height: auto !important; min-height: 200px; }
 
             .modal-content { padding: 2.5rem 1.5rem 2rem 1.5rem; margin: 0 1rem; }
         }
@@ -483,7 +485,8 @@
             <div class="img-wrap">
                 <div class="media-target w-full h-full">
                     <img src="assets/images/hmu-pic2.png" class="img-fit" alt="Heavy Marine Utility"
-                         onerror="this.src='assets/images/hmu-logo.png'">
+                         style="object-position: left center;"
+                         onerror="this.src='assets/images/hmu-logo.png'; this.style.objectPosition='center center'; this.style.objectFit='contain'; this.style.padding='1rem'; this.style.background='#111';">
                 </div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
