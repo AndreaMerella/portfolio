@@ -64,6 +64,7 @@
         body.standby #boot-trigger { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2.2); background-color: transparent; padding: 0; margin: 0; }
         body.standby #boot-trigger .loud-dot { color: #f4f4f0; }
         body.standby #boot-trigger .copyright-text { opacity: 0; }
+        #boot-trigger.logo-in-flow { position: relative; top: auto; left: auto; transform: none; z-index: auto; margin-top: 3rem; margin-left: 3rem; }
 
         @keyframes pixar-drop { 0% { transform: translateY(-300px) scaleY(1.5) scaleX(0.8); opacity: 0; } 60% { transform: translateY(20px) scaleY(0.7) scaleX(1.3); opacity: 1; } 80% { transform: translateY(-15px) scaleY(1.1) scaleX(0.9); } 100% { transform: translateY(0) scaleY(1) scaleX(1); } }
         @keyframes mtv-smash { 0% { transform: scale(1) rotate(0deg); } 20% { transform: scale(1.4) rotate(-15deg); } 40% { transform: scale(0.8) rotate(20deg); } 60% { transform: scale(1.2) rotate(-5deg); } 100% { transform: scale(1) rotate(0deg); } }
@@ -404,7 +405,7 @@
         </div>
     </header>
 
-    <section class="pt-56 pb-20 px-16 max-w-7xl relative z-10">
+    <section class="pt-12 pb-20 px-16 max-w-7xl relative z-10">
         <h1 class="font-['Bungee'] text-[5rem] uppercase leading-[0.85] mb-6">
             Engineering <span class="loud-highlight">Sound</span> <br> <span class="loud-amp">&</span> <span class="tech-highlight">Systems</span>.
         </h1>
@@ -698,7 +699,7 @@
                 playSoothingBootSound();
                 document.body.classList.remove('standby');
                 this.querySelector('.copyright-text').style.opacity = '0.6';
-                setTimeout(() => { document.body.style.overflow = ''; }, 1500);
+                setTimeout(() => { document.body.style.overflow = ''; bootTrigger.classList.add('logo-in-flow'); }, 1500);
             } else {
                 const logoText = this.querySelector('.logo-text');
                 logoText.style.animation = 'none'; void logoText.offsetWidth;
