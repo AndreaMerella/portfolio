@@ -57,10 +57,11 @@
         body.standby { background-color: #050505 !important; color: #f4f4f0 !important; overflow: hidden; height: 100dvh; }
         #boot-trigger {
             position: fixed; z-index: 99999; top: 3rem; left: 3rem; transform: scale(1);
-            transition: top 1.5s cubic-bezier(0.85, 0, 0.15, 1), left 1.5s cubic-bezier(0.85, 0, 0.15, 1);
+            transition: top 1.5s cubic-bezier(0.85, 0, 0.15, 1), left 1.5s cubic-bezier(0.85, 0, 0.15, 1), background-color 0.8s ease;
             cursor: crosshair; display: inline-block;
+            background-color: var(--bg-color); padding: 0.25rem 0.5rem; margin: -0.25rem -0.5rem;
         }
-        body.standby #boot-trigger { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2.2); }
+        body.standby #boot-trigger { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2.2); background-color: transparent; padding: 0; margin: 0; }
         body.standby #boot-trigger .loud-dot { color: #f4f4f0; }
         body.standby #boot-trigger .copyright-text { opacity: 0; }
 
