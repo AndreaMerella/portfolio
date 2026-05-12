@@ -345,8 +345,9 @@
                 transform: rotate(-2deg);
             }
 
-            /* No blank tail — tighten section bottom padding and grid bottom padding */
-            .project-grid { padding: 0 1.25rem 4rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
+            /* No blank tail — tighten section bottom padding and grid bottom padding.
+               6rem baseline so the closed player (~60px) never sits on the last card. */
+            .project-grid { padding: 0 1.25rem 6rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
 
             section { padding-top: 13rem !important; padding-bottom: 1rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
             #boot-trigger.logo-in-flow { margin-top: 5rem; margin-left: 1.25rem; }
@@ -748,8 +749,37 @@
             });
         }
 
-        function toggleAudio(id) { document.getElementById('panel-' + id).classList.toggle('open'); }
+        function toggleAudio(id) {
+            const panel = document.getElementById('panel-' + id);
+            panel.classList.toggle('open');
+            // On mobile the player is pinned to the bottom of the viewport.
+            // After the accordion animation settles, measure the player height and
+            // add that as extra bottom padding to <main> so the last card's
+            // EXECUTE HUB button can always be scrolled above the player.
+            if (window.innerWidth <= 768) {
+                const hub = document.getElementById('audio-hub');
+                const main = document.querySelector('main');
+                if (panel.classList.contains('open')) {
+                    setTimeout(() => { main.style.paddingBottom = hub.offsetHeight + 32 + 'px'; }, 460);
+                } else {
+                    main.style.paddingBottom = '';
+                }
+            }
+        }
         function toggleForm() { document.getElementById('contact-modal').classList.toggle('active'); }
+
+        // Reset dynamic bottom padding on resize so it stays accurate
+        window.addEventListener('resize', () => {
+            const main = document.querySelector('main');
+            if (window.innerWidth > 768) { main.style.paddingBottom = ''; return; }
+            const open = document.querySelector('.audio-accordion.open');
+            if (open) {
+                const hub = document.getElementById('audio-hub');
+                main.style.paddingBottom = hub.offsetHeight + 32 + 'px';
+            } else {
+                main.style.paddingBottom = '';
+            }
+        });
 
         const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
         let nIdx = 0, dir = 1;
