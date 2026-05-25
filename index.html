@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ANDREA MERELLA // PORTFOLIO</title>
 
+    <!-- Canonical URL — tells search engines this is the original -->
+    <link rel="canonical" href="https://andreamerella.github.io/portfolio/">
+    <!-- Anti-clone: redirect visitors who land on a copy back to the real site -->
+    <script>
+      (function() {
+        var allowed = ['andreamerella.github.io', 'localhost', '127.0.0.1'];
+        var host = window.location.hostname;
+        if (!allowed.some(function(d) { return host === d || host.endsWith('.' + d); })) {
+          document.documentElement.style.display = 'none';
+          window.location.replace('https://andreamerella.github.io/portfolio/');
+        }
+      })();
+    </script>
+
     <!-- Social / OG preview — shows the AM. landing page, not a project image -->
     <meta property="og:title" content="ANDREA MERELLA // PORTFOLIO">
     <meta property="og:description" content="Audio Specialist and Creative Developer based in Amsterdam. Sound, systems, and high-voltage digital experiences.">
