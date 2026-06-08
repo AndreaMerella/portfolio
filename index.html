@@ -44,7 +44,7 @@
     <meta name="twitter:image" content="https://andreamerella.com/assets/images/og-preview.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -221,6 +221,42 @@
 
         .mode-sleek .loud-highlight, .mode-sleek .tech-highlight {
             padding: 0 0.5rem; transition: color 0.4s; border: none; margin: 0 0.2rem; color: inherit; display: inline-block;
+        }
+
+        /* === VNGRD — FLOAT + IN-PLACE TICKER === */
+        @keyframes vngrd-float {
+            0%,100% { transform:translateY(0px) }
+            50%     { transform:translateY(-7px) }
+        }
+
+        /* Title keeps a simple float, no color override */
+        #proj-vanguard .project-title {
+            display:inline-block;
+            animation: vngrd-float 3.5s ease-in-out infinite;
+        }
+
+        .vngrd-ticker-wrap {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            overflow: hidden; height: 22px;
+            background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+            display: flex; align-items: center;
+        }
+        @keyframes vngrd-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .vngrd-ticker-inner {
+            display: flex; white-space: nowrap;
+            animation: vngrd-scroll 12s linear infinite;
+            font-family: var(--font-sub); font-size: 9px; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.7);
+        }
+        .vngrd-ticker-inner span { padding: 0 2rem; }
+
+        /* Zoom vngrd video slightly to crop out Veo watermark */
+        #proj-vanguard .img-fit {
+            transform: scale(1.08);
+            transform-origin: center center;
         }
 
         @keyframes sleek-hover-float {
@@ -448,9 +484,14 @@
         <!-- VNGRD -->
         <div class="project-block group" id="proj-vanguard">
             <span class="project-sticker bg-white">HYBRID WORKSTATION</span>
-            <div class="img-wrap">
+            <div class="img-wrap" style="position:relative;">
                 <div class="media-target w-full h-full">
                     <video src="assets/images/vngrd.mp4" class="img-fit" autoplay loop muted playsinline></video>
+                </div>
+                <div class="vngrd-ticker-wrap">
+                    <div class="vngrd-ticker-inner">
+                        <span>VNGRD// &mdash; HYBRID WORKSTATION &mdash; BROWSER-NATIVE &mdash; REAL-TIME AV &mdash; LIVE PRODUCTION &mdash;</span><span>VNGRD// &mdash; HYBRID WORKSTATION &mdash; BROWSER-NATIVE &mdash; REAL-TIME AV &mdash; LIVE PRODUCTION &mdash;</span>
+                    </div>
                 </div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
@@ -527,7 +568,7 @@
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">EXPLORER</h2>
                     <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">An interactive, educational Progressive Web App (PWA) designed to help kids navigate and map the urban soundscape of Amsterdam.</p>
                 </div>
-                <div><a href="https://andreamerella.github.io/AmsterdamExplorer/index.html" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://amsterdamadventure.nl" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
