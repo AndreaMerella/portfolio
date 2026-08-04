@@ -1,14 +1,3 @@
-<!--
-  © 2026 Andrea Merella. All rights reserved.
-  https://andreamerella.com
-
-  This source code is the exclusive intellectual property of Andrea Merella.
-  Unauthorised copying, reproduction, modification, distribution or use
-  of any part of this work — in whole or in part — is strictly prohibited
-  without prior written permission from the author.
-
-  For licensing enquiries: andreamerella@gmail.com
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,35 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ANDREA MERELLA // PORTFOLIO</title>
 
-    <!-- Canonical URL — tells search engines this is the original -->
-    <link rel="canonical" href="https://andreamerella.com/">
-    <!-- Anti-clone: redirect visitors who land on a copy back to the real site -->
-    <script>
-      (function() {
-        var allowed = ['andreamerella.com', 'andreamerella.github.io', 'localhost', '127.0.0.1'];
-        var host = window.location.hostname;
-        if (!allowed.some(function(d) { return host === d || host.endsWith('.' + d); })) {
-          document.documentElement.style.display = 'none';
-          window.location.replace('https://andreamerella.com/');
-        }
-      })();
-    </script>
-
     <!-- Social / OG preview — shows the AM. landing page, not a project image -->
     <meta property="og:title" content="ANDREA MERELLA // PORTFOLIO">
     <meta property="og:description" content="Audio Specialist and Creative Developer based in Amsterdam. Sound, systems, and high-voltage digital experiences.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://andreamerella.com/">
-    <meta property="og:image" content="https://andreamerella.com/assets/images/og-preview.png">
+    <meta property="og:url" content="https://andreamerella.github.io/portfolio/">
+    <meta property="og:image" content="https://andreamerella.github.io/portfolio/assets/images/og-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ANDREA MERELLA // PORTFOLIO">
     <meta name="twitter:description" content="Audio Specialist and Creative Developer based in Amsterdam.">
-    <meta name="twitter:image" content="https://andreamerella.com/assets/images/og-preview.png">
+    <meta name="twitter:image" content="https://andreamerella.github.io/portfolio/assets/images/og-preview.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -223,42 +198,6 @@
             padding: 0 0.5rem; transition: color 0.4s; border: none; margin: 0 0.2rem; color: inherit; display: inline-block;
         }
 
-        /* === VNGRD — FLOAT + IN-PLACE TICKER === */
-        @keyframes vngrd-float {
-            0%,100% { transform:translateY(0px) }
-            50%     { transform:translateY(-7px) }
-        }
-
-        /* Title keeps a simple float, no color override */
-        #proj-vanguard .project-title {
-            display:inline-block;
-            animation: vngrd-float 3.5s ease-in-out infinite;
-        }
-
-        .vngrd-ticker-wrap {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            overflow: hidden; height: 22px;
-            background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
-            display: flex; align-items: center;
-        }
-        @keyframes vngrd-scroll {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .vngrd-ticker-inner {
-            display: flex; white-space: nowrap;
-            animation: vngrd-scroll 12s linear infinite;
-            font-family: var(--font-sub); font-size: 9px; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.7);
-        }
-        .vngrd-ticker-inner span { padding: 0 2rem; }
-
-        /* Zoom vngrd video slightly to crop out Veo watermark */
-        #proj-vanguard .img-fit {
-            transform: scale(1.08);
-            transform-origin: center center;
-        }
-
         @keyframes sleek-hover-float {
             0%, 100% { transform: translateY(-5px); text-shadow: 0px 4px 15px rgba(0,0,0,0.1), 0px 0px 25px rgba(100,150,255,0.4); }
             50% { transform: translateY(-8px); text-shadow: 0px 8px 20px rgba(0,0,0,0.15), 0px 0px 35px rgba(100,150,255,0.6); }
@@ -322,9 +261,6 @@
         .eq-bar:nth-child(2) { animation-delay: 0.3s; }
         .eq-bar:nth-child(3) { animation-delay: 0s; }
         @keyframes eq-bounce { 0% { transform: scaleY(0.2); } 100% { transform: scaleY(1); } }
-        @keyframes sdrocer-bar { 0%,100% { transform: scaleY(0.15); opacity:0.4; } 50% { transform: scaleY(1); opacity:1; } }
-        .sdrocer-wave { display:flex; align-items:flex-end; gap:3px; height:48px; }
-        .sdrocer-wave span { display:block; width:4px; border-radius:2px 2px 0 0; background:#a855f7; box-shadow:0 0 8px rgba(168,85,247,0.7); transform-origin:bottom; animation: sdrocer-bar 1.1s ease-in-out infinite; }
 
         .help-trigger { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid currentColor; border-radius: 50%; font-size: 10px; font-weight: bold; opacity: 0.6; cursor: help; margin-left: 4px; }
         .help-trigger:hover { opacity: 1; background: currentColor; color: var(--bg-color); }
@@ -409,9 +345,8 @@
                 transform: rotate(-2deg);
             }
 
-            /* No blank tail — tighten section bottom padding and grid bottom padding.
-               6rem baseline so the closed player (~60px) never sits on the last card. */
-            .project-grid { padding: 0 1.25rem 6rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
+            /* No blank tail — tighten section bottom padding and grid bottom padding */
+            .project-grid { padding: 0 1.25rem 4rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
 
             section { padding-top: 13rem !important; padding-bottom: 1rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
             #boot-trigger.logo-in-flow { margin-top: 5rem; margin-left: 1.25rem; }
@@ -481,9 +416,43 @@
 
     <main class="project-grid">
 
+        <!-- VNGRD -->
+        <div class="project-block group" id="proj-vanguard">
+            <span class="project-sticker bg-white">HYBRID WORKSTATION</span>
+            <div class="img-wrap">
+                <div class="media-target w-full h-full">
+                    <video src="assets/images/vngrd.mp4" class="img-fit" autoplay loop muted playsinline></video>
+                </div>
+            </div>
+            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
+                <div>
+                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">VNGRD//</h2>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Experimental browser-native media system for real-time audiovisual production.</p>
+                </div>
+                <div><a href="https://vngrd-core.github.io/" target="_blank" class="exec-btn" id="link-vanguard">EXECUTE HUB &rarr;</a></div>
+            </div>
+        </div>
+
+        <!-- SDROCER -->
+        <div class="project-block group" id="proj-sdrocer">
+            <span class="project-sticker bg-lime-400">VINYL DIGGER</span>
+            <div class="img-wrap" style="background: radial-gradient(circle at 50% 50%, #2a2a2a 28%, #111 30%, #1e1e1e 32%, #111 48%, #1e1e1e 50%, #111 65%, #1e1e1e 67%, #0a0a0a 100%);">
+                <div class="media-target w-full h-full">
+                    <video src="assets/images/sdrocer-demo.mov" class="img-fit" autoplay loop muted playsinline style="mix-blend-mode: lighten;"></video>
+                </div>
+            </div>
+            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
+                <div>
+                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">SDROCER</h2>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Interactive digital crate-digging experience.</p>
+                </div>
+                <div><a href="https://andreamerella.github.io/SDROCER/" target="_blank" class="exec-btn" id="link-sdrocer">EXECUTE HUB &rarr;</a></div>
+            </div>
+        </div>
+
         <!-- I DO NOT HAVE DREAMS, I HAVE NIGHTMARES -->
         <div class="project-block group" id="proj-nightlog">
-            <span class="project-sticker bg-purple-600 text-white">NIGHTMARE / AI</span>
+            <span class="project-sticker bg-purple-600 text-white">DREAM JOURNAL</span>
             <div class="img-wrap" style="background:#03010c;">
                 <div class="media-target w-full h-full">
                     <img src="assets/images/nightlog-cover.png" class="img-fit" alt="I Do Not Have Dreams, I Have Nightmares">
@@ -492,83 +461,26 @@
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
                     <h2 class="project-title font-['Bungee'] text-xl uppercase mb-3 leading-tight tracking-tight">I DO NOT HAVE DREAMS, I HAVE NIGHTMARES</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Log your nightmares, visualize them with AI. Progressive Web App — works on any device, offline-ready. fal.ai image generation coming soon.</p>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">A PWA for capturing and revisiting the subconscious. Google-backed infrastructure for cross-device sync. AI-generated visuals that materialize what lives in your sleep.</p>
                 </div>
                 <div><a href="https://i-do-not-have-dreams-ihave-nightmar.vercel.app/" target="_blank" class="exec-btn" id="link-nightlog">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
-        <!-- VNGRD -->
-        <div class="project-block group" id="proj-vanguard">
-            <span class="project-sticker bg-white">HYBRID WORKSTATION</span>
-            <div class="img-wrap" style="position:relative;">
+        <!-- MATTIE / WEB3 -->
+        <div class="project-block group" id="proj-mattie">
+            <span class="project-sticker bg-pink-500 text-white">WEB3 PLATFORM</span>
+            <div class="img-wrap">
                 <div class="media-target w-full h-full">
-                    <video src="assets/images/vngrd.mp4" class="img-fit" autoplay loop muted playsinline></video>
-                </div>
-                <div class="vngrd-ticker-wrap">
-                    <div class="vngrd-ticker-inner">
-                        <span>VNGRD// &mdash; HYBRID WORKSTATION &mdash; BROWSER-NATIVE &mdash; REAL-TIME AV &mdash; LIVE PRODUCTION &mdash;</span><span>VNGRD// &mdash; HYBRID WORKSTATION &mdash; BROWSER-NATIVE &mdash; REAL-TIME AV &mdash; LIVE PRODUCTION &mdash;</span>
-                    </div>
+                    <img src="assets/images/mattie-web3.jpg" class="img-fit" alt="MATTIE / WEB3">
                 </div>
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">VNGRD//</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Experimental browser-native media system for real-time audiovisual production.</p>
+                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">MATTIE / WEB3</h2>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">A Web3 project focused on digital wearables and metaverse architecture. Originating in the Voxels metaverse, MATTIE was an active digital space used to display and sell custom NFT wearables and voxel collectibles across Ethereum, Tezos, and the broader decentralized web.</p>
                 </div>
-                <div><a href="https://vngrd.live" target="_blank" class="exec-btn" id="link-vanguard">EXECUTE HUB &rarr;</a></div>
-            </div>
-        </div>
-
-        <!-- SDROCER -->
-        <div class="project-block group" id="proj-sdrocer">
-            <span class="project-sticker bg-[#7c3aed] text-white">VINYL DIGGER</span>
-            <div class="img-wrap" style="background: radial-gradient(circle at 50% 50%, #1a0030 28%, #0d0020 30%, #110028 32%, #0a0018 48%, #110028 50%, #0a0018 65%, #110028 67%, #060010 100%);">
-                <div class="media-target w-full h-full flex flex-col items-center justify-center gap-3">
-                    <div class="sdrocer-wave">
-                        <span style="height:28px;animation-delay:0s"></span>
-                        <span style="height:40px;animation-delay:0.1s"></span>
-                        <span style="height:20px;animation-delay:0.2s"></span>
-                        <span style="height:44px;animation-delay:0.05s"></span>
-                        <span style="height:32px;animation-delay:0.25s"></span>
-                        <span style="height:48px;animation-delay:0.15s"></span>
-                        <span style="height:24px;animation-delay:0.3s"></span>
-                        <span style="height:36px;animation-delay:0.08s"></span>
-                        <span style="height:44px;animation-delay:0.22s"></span>
-                        <span style="height:18px;animation-delay:0.35s"></span>
-                        <span style="height:40px;animation-delay:0.12s"></span>
-                        <span style="height:30px;animation-delay:0.18s"></span>
-                        <span style="height:48px;animation-delay:0.04s"></span>
-                        <span style="height:22px;animation-delay:0.28s"></span>
-                        <span style="height:38px;animation-delay:0.16s"></span>
-                    </div>
-                    <div style="font-family:'Courier New',monospace; text-align:center;">
-                        <div style="color:#a855f7; font-size:1.4rem; font-weight:900; letter-spacing:0.18em; line-height:1; text-shadow:0 0 24px rgba(168,85,247,0.5);">SDROCER</div>
-                        <div style="color:#6d28d9; font-size:0.55rem; letter-spacing:0.3em; margin-top:0.4rem; opacity:0.7;">CRATE DIGGER</div>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
-                <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">SDROCER</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Interactive digital crate-digging experience. Explore records, flip through sleeves, and discover music the old way — rebuilt for the web.</p>
-                </div>
-                <div><a href="https://sdrocer.netlify.app/" target="_blank" class="exec-btn" id="link-sdrocer">LAUNCH &rarr;</a></div>
-            </div>
-        </div>
-
-        <!-- CASA NINA -->
-        <div class="project-block group" id="proj-casanina">
-            <span class="project-sticker bg-[#b5703a] text-white">HOSPITALITY</span>
-            <div class="img-wrap" style="background:#faf8f4;">
-                <object type="image/svg+xml" data="assets/bocca-anim.svg" tabindex="-1" style="width:100%;height:100%;display:block;outline:none;border:none;pointer-events:none;" aria-label="Casa Nina Carignano"></object>
-            </div>
-            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
-                <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">CASA NINA</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Direct-booking site for a vacation apartment in Genova. Next.js 15, animated SVG scenes, multilingual, Vikey smart check-in, promo code system. 5.0 ★ on Airbnb.</p>
-                </div>
-                <div><a href="https://casaninacarignano.com" target="_blank" class="exec-btn" id="link-casanina">VISIT SITE &rarr;</a></div>
+                <div><a href="https://andreamerellaaudio.wixsite.com/driscreativelab/mattie-web3" target="_blank" class="exec-btn" id="link-mattie">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
@@ -582,10 +494,10 @@
             </div>
             <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
                 <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">AMSTERDAM ADVENTURE</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">A bilingual edutainment PWA turning Amsterdam's streets, canals, and history into 31 real-world missions for kids aged 6–15.</p>
+                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">EXPLORER</h2>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">An interactive, educational Progressive Web App (PWA) designed to help kids navigate and map the urban soundscape of Amsterdam.</p>
                 </div>
-                <div><a href="https://amsterdamadventure.nl" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://andreamerella.github.io/AmsterdamExplorer/index.html" target="_blank" class="exec-btn" id="link-explorer">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
@@ -608,52 +520,6 @@
             </div>
         </div>
 
-        <!-- GRIFONE SPOTTER -->
-        <div class="project-block group" id="proj-grifone">
-            <span class="project-sticker bg-red-600 text-white">SPORTS TECH</span>
-            <div class="img-wrap" style="background: linear-gradient(135deg, #011E41 0%, #0b0c2a 45%, #2a0608 75%, #E5002A 100%);">
-                <div class="media-target w-full h-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="width:60%;height:60%;opacity:0.85;">
-                        <text x="100" y="118" text-anchor="middle" font-family="Impact,sans-serif" font-size="80" fill="#fff" letter-spacing="2">G</text>
-                        <text x="100" y="148" text-anchor="middle" font-family="Impact,sans-serif" font-size="13" fill="#D4AF37" letter-spacing="4">RICERCATORI</text>
-                        <rect x="0" y="0" width="200" height="5" fill="#E5002A" opacity="0.9"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
-                <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">GRIFONE_SPOTTER</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Real-time geolocated fan tracker for Genoa CFC — spot, map, and connect with the rossoblù faithful across Liguria and beyond.</p>
-                </div>
-                <div><a href="https://andreamerella.github.io/grifone-spotter/" target="_blank" class="exec-btn" id="link-grifone">EXECUTE HUB &rarr;</a></div>
-            </div>
-        </div>
-
-        <!-- DU FATTUR -->
-        <div class="project-block group" id="proj-dufattur">
-            <span class="project-sticker bg-[#ffcc00] text-black">FREELANCE OS</span>
-            <div class="img-wrap" style="background: #0a0a0a;">
-                <div class="media-target w-full h-full flex items-center justify-center" style="background: radial-gradient(ellipse at 60% 40%, rgba(255,204,0,0.12) 0%, #0a0a0a 70%);">
-                    <div style="font-family:'Courier New',monospace; text-align:left; padding:1.5rem; width:90%;">
-                        <div style="color:#ffcc00; font-size:1.5rem; font-weight:900; letter-spacing:-0.03em; line-height:1;">DU<span style="color:#fff;">FATTUR</span></div>
-                        <div style="color:#444; font-size:9px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; margin-top:4px;">The Freelance OS</div>
-                        <div style="margin-top:1rem; display:flex; flex-direction:column; gap:6px;">
-                            <div style="background:#111; border:1px solid #1c1c1c; border-radius:6px; padding:6px 10px; color:#666; font-size:9px;">⚡ Dashboard</div>
-                            <div style="background:#111; border:1px solid rgba(255,204,0,0.3); border-radius:6px; padding:6px 10px; color:#ffcc00; font-size:9px;">📋 Proforma Invoice</div>
-                            <div style="background:#111; border:1px solid #1c1c1c; border-radius:6px; padding:6px 10px; color:#666; font-size:9px;">📊 Analytics</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
-                <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">DU FATTUR</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Full-stack freelance OS — proforma invoicing, revenue analytics, PDF export, Supabase backend, and bilingual IT/EN interface.</p>
-                </div>
-                <div><a href="https://andreamerella.github.io/DuFattur/" target="_blank" class="exec-btn" id="link-dufattur">EXECUTE HUB &rarr;</a></div>
-            </div>
-        </div>
-
         <!-- DRIS_LAB -->
         <div class="project-block group" id="proj-dris-lab">
             <span class="project-sticker bg-cyan-400">AUDIO/VISUAL</span>
@@ -668,23 +534,6 @@
                     <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Interactive audio-visual platform for advanced sound synthesis and real-time visual rendering.</p>
                 </div>
                 <div><a href="https://andreamerella.github.io/DrisLab/" target="_blank" class="exec-btn" id="link-dris-lab">EXECUTE HUB &rarr;</a></div>
-            </div>
-        </div>
-
-        <!-- MATTIE / WEB3 -->
-        <div class="project-block group" id="proj-mattie">
-            <span class="project-sticker bg-pink-500 text-white">WEB3 PLATFORM</span>
-            <div class="img-wrap">
-                <div class="media-target w-full h-full">
-                    <img src="assets/images/mattie-web3.jpg" class="img-fit" alt="MATTIE / WEB3">
-                </div>
-            </div>
-            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
-                <div>
-                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">MATTIE / WEB3</h2>
-                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">A Web3 project focused on digital wearables and metaverse architecture. Originating in the Voxels metaverse, MATTIE was an active digital space used to display and sell custom NFT wearables and voxel collectibles across Ethereum, Tezos, and the broader decentralized web.</p>
-                </div>
-                <div><a href="https://andreamerellaaudio.wixsite.com/driscreativelab/mattie-web3" target="_blank" class="exec-btn" id="link-mattie">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
@@ -916,37 +765,8 @@
             });
         }
 
-        function toggleAudio(id) {
-            const panel = document.getElementById('panel-' + id);
-            panel.classList.toggle('open');
-            // On mobile the player is pinned to the bottom of the viewport.
-            // After the accordion animation settles, measure the player height and
-            // add that as extra bottom padding to <main> so the last card's
-            // EXECUTE HUB button can always be scrolled above the player.
-            if (window.innerWidth <= 768) {
-                const hub = document.getElementById('audio-hub');
-                const main = document.querySelector('main');
-                if (panel.classList.contains('open')) {
-                    setTimeout(() => { main.style.paddingBottom = hub.offsetHeight + 32 + 'px'; }, 460);
-                } else {
-                    main.style.paddingBottom = '';
-                }
-            }
-        }
+        function toggleAudio(id) { document.getElementById('panel-' + id).classList.toggle('open'); }
         function toggleForm() { document.getElementById('contact-modal').classList.toggle('active'); }
-
-        // Reset dynamic bottom padding on resize so it stays accurate
-        window.addEventListener('resize', () => {
-            const main = document.querySelector('main');
-            if (window.innerWidth > 768) { main.style.paddingBottom = ''; return; }
-            const open = document.querySelector('.audio-accordion.open');
-            if (open) {
-                const hub = document.getElementById('audio-hub');
-                main.style.paddingBottom = hub.offsetHeight + 32 + 'px';
-            } else {
-                main.style.paddingBottom = '';
-            }
-        });
 
         const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
         let nIdx = 0, dir = 1;
