@@ -758,7 +758,7 @@
             }
             animateCursor();
 
-            const interactables = document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn), .audio-header, .project-block');
+            const interactables = document.querySelectorAll('a:not(.exec-btn), button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn), .audio-header, .project-block');
             interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
@@ -960,7 +960,7 @@
             }
         }
 
-        document.querySelectorAll('a, button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn):not(#custom-prev-btn):not(#custom-next-btn):not(.mode-btn):not(#build-sticker), .audio-header, .project-block').forEach(n => {
+        document.querySelectorAll('a:not(.exec-btn), button:not(#boot-trigger):not(#fx-toggle):not(#custom-play-btn):not(#custom-prev-btn):not(#custom-next-btn):not(.mode-btn):not(#build-sticker), .audio-header, .project-block').forEach(n => {
             n.addEventListener('mouseenter', playSound);
             n.addEventListener('touchstart', playSound, {passive: true});
         });
