@@ -198,6 +198,42 @@
             padding: 0 0.5rem; transition: color 0.4s; border: none; margin: 0 0.2rem; color: inherit; display: inline-block;
         }
 
+        /* === VNGRD — FLOAT + IN-PLACE TICKER === */
+        @keyframes vngrd-float {
+            0%,100% { transform:translateY(0px) }
+            50%     { transform:translateY(-7px) }
+        }
+
+        /* Title keeps a simple float, no color override */
+        #proj-vanguard .project-title {
+            display:inline-block;
+            animation: vngrd-float 3.5s ease-in-out infinite;
+        }
+
+        .vngrd-ticker-wrap {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            overflow: hidden; height: 22px;
+            background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+            display: flex; align-items: center;
+        }
+        @keyframes vngrd-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .vngrd-ticker-inner {
+            display: flex; white-space: nowrap;
+            animation: vngrd-scroll 12s linear infinite;
+            font-family: var(--font-sub); font-size: 9px; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.7);
+        }
+        .vngrd-ticker-inner span { padding: 0 2rem; }
+
+        /* Zoom vngrd video to crop out Veo watermark (bottom-right corner) */
+        #proj-vanguard .img-fit {
+            transform: scale(1.15);
+            transform-origin: top left;
+        }
+
         @keyframes sleek-hover-float {
             0%, 100% { transform: translateY(-5px); text-shadow: 0px 4px 15px rgba(0,0,0,0.1), 0px 0px 25px rgba(100,150,255,0.4); }
             50% { transform: translateY(-8px); text-shadow: 0px 8px 20px rgba(0,0,0,0.15), 0px 0px 35px rgba(100,150,255,0.6); }
@@ -541,15 +577,15 @@
 
         <!-- DU FATTUR -->
         <div class="project-block group" id="proj-dufattur">
-            <span class="project-sticker bg-[#ffcc00] text-black">FREELANCE OS</span>
+            <span class="project-sticker bg-[#3b82f6] text-white">FREELANCE OS</span>
             <div class="img-wrap" style="background: #0a0a0a;">
-                <div class="media-target w-full h-full flex items-center justify-center" style="background: radial-gradient(ellipse at 60% 40%, rgba(255,204,0,0.12) 0%, #0a0a0a 70%);">
+                <div class="media-target w-full h-full flex items-center justify-center" style="background: radial-gradient(ellipse at 60% 40%, rgba(59,130,246,0.12) 0%, #0a0a0a 70%);">
                     <div style="font-family:'Courier New',monospace; text-align:left; padding:1.5rem; width:90%;">
-                        <div style="color:#ffcc00; font-size:1.5rem; font-weight:900; letter-spacing:-0.03em; line-height:1;">DU<span style="color:#fff;">FATTUR</span></div>
+                        <div style="color:#3b82f6; font-size:1.5rem; font-weight:900; letter-spacing:-0.03em; line-height:1;">DU<span style="color:#fff;">FATTUR</span></div>
                         <div style="color:#444; font-size:9px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; margin-top:4px;">The Freelance OS</div>
                         <div style="margin-top:1rem; display:flex; flex-direction:column; gap:6px;">
                             <div style="background:#111; border:1px solid #1c1c1c; border-radius:6px; padding:6px 10px; color:#666; font-size:9px;">⚡ Dashboard</div>
-                            <div style="background:#111; border:1px solid rgba(255,204,0,0.3); border-radius:6px; padding:6px 10px; color:#ffcc00; font-size:9px;">📋 Proforma Invoice</div>
+                            <div style="background:#111; border:1px solid rgba(59,130,246,0.3); border-radius:6px; padding:6px 10px; color:#3b82f6; font-size:9px;">📋 Proforma Invoice</div>
                             <div style="background:#111; border:1px solid #1c1c1c; border-radius:6px; padding:6px 10px; color:#666; font-size:9px;">📊 Analytics</div>
                         </div>
                     </div>
@@ -560,7 +596,7 @@
                     <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">DU FATTUR</h2>
                     <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Full-stack freelance OS — proforma invoicing, revenue analytics, PDF export, Supabase backend, and bilingual IT/EN interface.</p>
                 </div>
-                <div><a href="https://andreamerella.github.io/DuFattur/" target="_blank" class="exec-btn" id="link-dufattur">EXECUTE HUB &rarr;</a></div>
+                <div><a href="https://dufattur.nl" target="_blank" class="exec-btn" id="link-dufattur">EXECUTE HUB &rarr;</a></div>
             </div>
         </div>
 
