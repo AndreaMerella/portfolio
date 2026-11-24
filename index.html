@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANDREA MERELLA // PORTFOLIO</title>
+    <title>Andrea Merella — Audio Specialist & Creative Developer, Amsterdam</title>
+    <meta name="description" content="Andrea Merella is an audio specialist and creative developer in Amsterdam. Sound design, spatial audio, interactive web experiences, and full-stack engineering.">
+    <link rel="canonical" href="https://andreamerella.com/">
 
     <!-- The AM. mark as the site icon: Google's search results, the browser tab, a phone's home screen.
          (Relative paths: the site is served at andreamerella.com and at andreamerella.github.io/portfolio/;
@@ -18,14 +20,18 @@
     <meta property="og:title" content="ANDREA MERELLA // PORTFOLIO">
     <meta property="og:description" content="Audio Specialist and Creative Developer based in Amsterdam. Sound, systems, and high-voltage digital experiences.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://andreamerella.github.io/portfolio/">
-    <meta property="og:image" content="https://andreamerella.github.io/portfolio/assets/images/og-preview.png">
+    <meta property="og:url" content="https://andreamerella.com/">
+    <meta property="og:site_name" content="Andrea Merella">
+    <meta property="og:image" content="https://andreamerella.com/assets/images/og-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ANDREA MERELLA // PORTFOLIO">
-    <meta name="twitter:description" content="Audio Specialist and Creative Developer based in Amsterdam.">
-    <meta name="twitter:image" content="https://andreamerella.github.io/portfolio/assets/images/og-preview.png">
+    <meta name="twitter:title" content="Andrea Merella — Audio Specialist & Creative Developer">
+    <meta name="twitter:description" content="Sound design, spatial audio, interactive web experiences, and full-stack engineering. Based in Amsterdam.">
+    <meta name="twitter:image" content="https://andreamerella.com/assets/images/og-preview.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Inter:wght@200;400;600;900&display=swap" rel="stylesheet">
@@ -83,13 +89,14 @@
         .logo-text { display: inline-block; transform-origin: center; transition: color 0.3s; }
         body.standby .logo-text { animation: pixar-drop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important; }
 
-        body.standby section, body.standby main, body.standby #audio-hub, body.standby .ui-panel, body.standby #build-sticker { opacity: 0; pointer-events: none; transform: translateY(40px); }
+        body.standby section, body.standby main, body.standby footer, body.standby #audio-hub, body.standby .ui-panel, body.standby #build-sticker { opacity: 0; pointer-events: none; transform: translateY(40px); }
         body.standby #interactive-grid { opacity: 0; pointer-events: none; }
         body:not(.standby) section { transition: opacity 1.2s 0.2s, transform 1.2s 0.2s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) main { transition: opacity 1.2s 0.4s, transform 1.2s 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) #audio-hub { transition: opacity 1.2s 0.6s, transform 1.2s 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) #build-sticker { transition: opacity 1.2s 0.7s, transform 1.2s 0.7s cubic-bezier(0.19, 1, 0.22, 1); }
         body:not(.standby) .ui-panel { transition: opacity 1.2s 0.8s, transform 1.2s 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+        body:not(.standby) footer { opacity: 1 !important; transform: none !important; }
         body:not(.standby) #interactive-grid { transition: opacity 2s 1s; }
 
         /* === GRID & CURSOR === */
@@ -404,6 +411,7 @@
 
             /* No blank tail — tighten section bottom padding and grid bottom padding */
             .project-grid { padding: 0 1.25rem 4rem 1.25rem; gap: 2rem; grid-template-columns: 1fr; }
+            footer { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
 
             section { padding-top: 13rem !important; padding-bottom: 1rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
             #boot-trigger.logo-in-flow { margin-top: 5rem; margin-left: 1.25rem; }
@@ -441,8 +449,104 @@
             }
         }
     </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://andreamerella.com/#website",
+          "url": "https://andreamerella.com/",
+          "name": "Andrea Merella",
+          "description": "Portfolio of Andrea Merella — Audio Specialist and Creative Developer based in Amsterdam.",
+          "publisher": { "@id": "https://andreamerella.com/#person" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://andreamerella.com/#webpage",
+          "url": "https://andreamerella.com/",
+          "name": "Andrea Merella — Audio Specialist & Creative Developer, Amsterdam",
+          "description": "Andrea Merella is an audio specialist and creative developer in Amsterdam. Sound design, spatial audio, interactive web experiences, and full-stack engineering.",
+          "isPartOf": { "@id": "https://andreamerella.com/#website" },
+          "about": { "@id": "https://andreamerella.com/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://andreamerella.com/#person",
+          "name": "Andrea Merella",
+          "givenName": "Andrea",
+          "familyName": "Merella",
+          "jobTitle": "Audio Specialist & Creative Developer",
+          "url": "https://andreamerella.com",
+          "image": "https://andreamerella.com/assets/images/og-preview.png",
+          "description": "Audio specialist and creative developer based in Amsterdam, working with sound design, spatial audio, interactive web experiences, and full-stack engineering.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Amsterdam",
+            "addressCountry": "NL"
+          },
+          "sameAs": [
+            "https://vngrd.live",
+            "https://dufattur.nl",
+            "https://casaninacarignano.com",
+            "https://open.spotify.com/artist/0XPPJdH7cRPxVBSjXfi9iE",
+            "https://soundcloud.com/andrea_merella",
+            "https://andreamerella.bandcamp.com/",
+            "https://www.instagram.com/andrea_dris/",
+            "https://x.com/andrea_dris",
+            "https://www.youtube.com/@andreadris",
+            "https://github.com/AndreaMerella"
+          ],
+          "knowsAbout": ["Sound Design", "Spatial Audio", "Web Audio API", "WebGL", "Creative Coding", "Full-Stack Development", "Music Production"]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://vngrd.live/#application",
+          "name": "VNGRD//",
+          "url": "https://vngrd.live",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "Web Browser",
+          "description": "Experimental browser-native media system for real-time audiovisual production.",
+          "creator": { "@id": "https://andreamerella.com/#person" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://dufattur.nl/#application",
+          "name": "Du Fattur",
+          "url": "https://dufattur.nl",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web Browser",
+          "description": "Full-stack freelance OS — proforma invoicing, revenue analytics, PDF export, and bilingual IT/EN interface.",
+          "creator": { "@id": "https://andreamerella.com/#person" }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://casaninacarignano.com/#application",
+          "name": "Casa Nina Carignano",
+          "url": "https://casaninacarignano.com",
+          "applicationCategory": "TravelApplication",
+          "description": "Direct-booking site for a vacation apartment in Genova with smart check-in and multilingual support.",
+          "creator": { "@id": "https://andreamerella.com/#person" }
+        }
+      ]
+    }
+    </script>
 </head>
 <body class="mode-loud standby" id="portfolio-body">
+
+    <!-- Noscript: reveal content for non-JS crawlers and users -->
+    <noscript>
+        <style>
+            body.standby section, body.standby main, body.standby footer,
+            body.standby #audio-hub, body.standby .ui-panel, body.standby #build-sticker {
+                opacity: 1 !important; pointer-events: auto !important; transform: none !important;
+            }
+            body.standby { background-color: #f6f6f6 !important; color: #050505 !important; overflow: auto !important; height: auto !important; }
+            body.standby #boot-trigger { position: relative !important; top: auto !important; left: auto !important; transform: none !important; margin-top: 3rem; margin-left: 3rem; }
+        </style>
+    </noscript>
 
     <div id="interactive-grid"></div>
 
@@ -450,12 +554,12 @@
     <div class="cursor-trail w-4 h-4" id="trail-1"></div>
     <div class="cursor-trail w-2 h-2" id="trail-2"></div>
 
-    <div class="ui-panel">
+    <nav class="ui-panel" aria-label="Visual mode switcher">
         <button class="mode-btn active" onclick="setMode('mode-loud', this)">01_LOUD</button>
         <button class="mode-btn" onclick="setMode('mode-tech', this)">02_TECH</button>
         <button class="mode-btn" onclick="setMode('mode-sleek', this)">03_SLEEK</button>
         <button id="fx-toggle" class="fx-btn" onclick="toggleFX()">FX: ON</button>
-    </div>
+    </nav>
 
     <header id="boot-trigger" class="flex flex-col">
         <div class="logo-text font-['Bungee'] text-6xl tracking-tighter mb-2">AM<span class="loud-dot">.</span></div>
@@ -638,6 +742,23 @@
             </div>
         </div>
 
+        <!-- GRAPPOLO -->
+        <div class="project-block group" id="proj-grappolo">
+            <span class="project-sticker bg-sky-400 text-black">HEALTH TECH</span>
+            <div class="img-wrap" style="background:#0B0E11;">
+                <div class="media-target w-full h-full">
+                    <img src="assets/images/grappolo-cover.png" class="img-fit" alt="Grappolo — Cluster Headache Diary" style="object-position: center center;">
+                </div>
+            </div>
+            <div class="project-content p-6 flex flex-col justify-between h-[210px] relative z-10">
+                <div>
+                    <h2 class="project-title font-['Bungee'] text-3xl uppercase mb-3 leading-none tracking-tight">GRAPPOLO</h2>
+                    <p class="font-['Space_Mono'] text-[11px] leading-snug opacity-90">Photophobia-safe voice-first attack diary for cluster headache & migraine patients. Dark UI for pain episodes, speech recognition in 3 languages, circadian pattern charts, 1-page neurology PDF. PWA, offline-first, built for the 15-minute consultation.</p>
+                </div>
+                <div><a href="https://grappolo-git-main-andreamerellas-projects.vercel.app/" target="_blank" class="exec-btn" id="link-grappolo">VISIT SITE &rarr;</a></div>
+            </div>
+        </div>
+
         <!-- MATTIE / WEB3 -->
         <div class="project-block group" id="proj-mattie">
             <span class="project-sticker bg-pink-500 text-white">WEB3 PLATFORM</span>
@@ -656,6 +777,12 @@
         </div>
 
     </main>
+
+    <footer class="relative z-10 py-8 px-16 max-w-7xl mx-auto" style="opacity:0; transform:translateY(40px); transition: opacity 1.2s 0.9s, transform 1.2s 0.9s cubic-bezier(0.19, 1, 0.22, 1);">
+        <p class="font-['Space_Mono'] text-[10px] opacity-50 uppercase tracking-wider">
+            © 2026 Andrea Merella · Audio Specialist & Creative Developer · Amsterdam, NL
+        </p>
+    </footer>
 
     <!-- MUSIC PLAYER DOCK -->
     <div id="audio-hub">
@@ -758,6 +885,9 @@
                 </a>
                 <a href="https://x.com/andrea_dris" target="_blank" class="hover:text-[var(--accent-blue)] hover:scale-110 transition-all icon-link opacity-60 hover:opacity-100">
                     <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@andreadris" target="_blank" class="hover:text-[var(--accent-pink)] hover:scale-110 transition-all icon-link opacity-60 hover:opacity-100">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
             </div>
         </div>
@@ -1244,6 +1374,17 @@
                 }
             } catch (err) { console.error("Microphone access denied:", err); alert("Microphone access is required for Voice/Clap commands."); }
         }
+
+        // Auto-boot for search engine crawlers and AI bots — reveals content without user click
+        (function() {
+            var ua = navigator.userAgent || '';
+            if (/bot|crawl|spider|search|slurp|lighthouse|pagespeed|oai-searchbot|perplexitybot|claudebot|applebot|google-extended|bingpreview|facebookexternalhit|twitterbot/i.test(ua)) {
+                document.body.classList.remove('standby');
+                document.body.style.overflow = '';
+                var trigger = document.getElementById('boot-trigger');
+                if (trigger) trigger.classList.add('logo-in-flow');
+            }
+        })();
     </script>
 </body>
 </html>
