@@ -200,10 +200,8 @@
         .mode-tech .project-sticker { position: absolute; top: 0; left: 0; background: #00ff41; color: #000; padding: 4px 10px; font-family: var(--font-sub); font-size: 10px; font-weight: bold; text-transform: uppercase; z-index: 30; }
         .mode-tech .exec-btn { background: transparent; border: 1px solid #00ff41; color: #00ff41; font-family: var(--font-sub); font-size: 10px; padding: 6px 12px; display: inline-block; transition: 0.2s; }
         .mode-tech .exec-btn:hover { background: #00ff41; color: #000; }
-        .mode-tech .img-fit { filter: sepia(1) hue-rotate(80deg) saturate(3) brightness(0.4); transition: 0.3s; }
-        .mode-tech .project-block:hover .img-fit { filter: sepia(1) hue-rotate(80deg) saturate(5) brightness(0.8); transform: scale(1.02); }
-        .mode-tech .grappolo-visual { filter: sepia(1) hue-rotate(80deg) saturate(3) brightness(0.5); transition: 0.3s; }
-        .mode-tech .project-block:hover .grappolo-visual { filter: sepia(1) hue-rotate(80deg) saturate(5) brightness(0.8); }
+        .mode-tech .img-wrap > * { filter: sepia(1) hue-rotate(80deg) saturate(3) brightness(0.4); transition: filter 0.4s; }
+        .mode-tech .project-block:hover .img-wrap > * { filter: none; }
 
         /* === MODE 03: SLEEK === */
         body.mode-sleek { --bg-color: #ffffff; --text-color: #0a0a0a; }
@@ -601,7 +599,7 @@
         <div class="project-block group" id="proj-grappolo-top">
             <span class="project-sticker bg-sky-400 text-black">HEALTH TECH</span>
             <div class="img-wrap" style="background:#0B0E11;">
-                <div class="media-target grappolo-visual w-full h-full flex flex-col items-center justify-center" style="background: radial-gradient(ellipse at 50% 40%, rgba(99,179,237,0.08) 0%, #0B0E11 70%);">
+                <div class="media-target w-full h-full flex flex-col items-center justify-center" style="background: radial-gradient(ellipse at 50% 40%, rgba(99,179,237,0.08) 0%, #0B0E11 70%);">
                     <!-- Hexagon logo -->
                     <div style="position:relative; width:100px; height:116px; margin-bottom:12px;">
                         <svg viewBox="0 0 120 139" fill="none" style="position:absolute;inset:0;width:100%;height:100%;">
