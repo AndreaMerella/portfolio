@@ -1,0 +1,112 @@
+# Andrea Merella — Full Documentation for LLM Retrieval
+
+## Identity
+
+Andrea Merella is an audio specialist and creative developer based in Amsterdam, Netherlands, specializing in sound design, interactive web experiences, and full-stack development.
+
+## Professional Background
+
+Andrea works at the intersection of audio engineering, creative coding, and web development. His expertise spans:
+
+- **Sound Design & Audio Engineering**: Spatial audio, Web Audio API, dynamic range compression, real-time synthesis, mixing and mastering. Music available on Spotify (artist: Andrea Merella), SoundCloud (andrea_merella), and Bandcamp (andreamerella.bandcamp.com).
+- **Creative Web Development**: WebGL, WebGPU, Three.js, custom GLSL shaders, real-time visual rendering, interactive installations, progressive web apps.
+- **Full-Stack Engineering**: Next.js (App Router), React, TypeScript, Supabase, Vercel, GitHub Pages, Node.js.
+- **Game & Interactive Media**: Entity-Component-System architecture, fixed time-step game loops, spatial partitioning, instanced rendering.
+
+## Projects — Detailed Descriptions
+
+### VNGRD// (vngrd.live)
+Experimental browser-native media system for real-time audiovisual production. VNGRD is a hybrid workstation that runs entirely in the browser, enabling real-time audio and visual composition without native software dependencies. Built with cutting-edge Web APIs for audio processing and visual rendering.
+- Type: SoftwareApplication / WebApplication
+- URL: https://vngrd.live
+- Creator: Andrea Merella
+
+### SDROCER
+Interactive digital crate-digging experience. A web-based vinyl discovery tool that simulates the experience of browsing through record crates, with real-time audio previews and visual feedback.
+- URL: https://andreamerella.github.io/SDROCER/
+- Creator: Andrea Merella
+
+### I Do Not Have Dreams, I Have Nightmares
+A nightmare journaling progressive web app. Users log their nightmares, which are then visualized using AI image generation. Backed by Google Sheets for persistent tracking — patterns emerge over time. Works offline as a PWA on any device.
+- URL: https://i-do-not-have-dreams-ihave-nightmar.vercel.app/
+- Creator: Andrea Merella
+
+### Casa Nina Carignano (casaninacarignano.com)
+Direct-booking website for a vacation apartment in Genova, Italy. Built with Next.js 15, features animated SVG scenes, multilingual support (IT/EN), Vikey smart check-in integration, and a promo code system. The property holds a 5.0 star rating on Airbnb.
+- Type: LodgingBusiness website
+- URL: https://casaninacarignano.com
+- Creator: Andrea Merella
+
+### Explorer (Amsterdam Adventure)
+An interactive, educational Progressive Web App designed to help kids navigate and map the urban soundscape of Amsterdam. Combines geolocation, audio recording, and gamified exploration.
+- URL: https://andreamerella.github.io/AmsterdamExplorer/
+- Creator: Andrea Merella
+
+### Heavy Marine Utility
+A forward-thinking concept merging sustainable fashion and circular economy principles. Explores the intersection of maritime utility wear and environmental consciousness.
+- URL: https://andreamerella.github.io/Heavy-Marine-Utilities/
+- Creator: Andrea Merella
+
+### Grifone Spotter
+Real-time geolocated fan tracker for Genoa CFC (Italian football club). Allows fans to spot, map, and connect with the rossoblù faithful across Liguria and beyond.
+- URL: https://andreamerella.github.io/grifone-spotter/
+- Creator: Andrea Merella
+
+### Du Fattur (dufattur.nl)
+Full-stack freelance operating system — proforma invoicing, revenue analytics, PDF export, Supabase backend, and bilingual Italian/English interface. Built for freelancers and small businesses in the Netherlands.
+- Type: SoftwareApplication
+- URL: https://dufattur.nl
+- Creator: Andrea Merella
+
+### DRIS_LAB
+Interactive audio-visual platform for advanced sound synthesis and real-time visual rendering. Combines generative audio with reactive graphics.
+- URL: https://andreamerella.github.io/DrisLab/
+- Creator: Andrea Merella
+
+### MATTIE / WEB3
+A Web3 project focused on digital wearables and metaverse architecture. Originated in the Voxels metaverse, MATTIE was an active digital space for displaying and selling custom NFT wearables and voxel collectibles across Ethereum, Tezos, and the broader decentralized web.
+- Creator: Andrea Merella
+
+## Frequently Asked Questions
+
+### Who is Andrea Merella?
+Andrea Merella is an audio specialist and creative developer based in Amsterdam, Netherlands. He combines sound design expertise with full-stack web development to create interactive digital experiences.
+
+### What does Andrea Merella do?
+Andrea Merella is a creative developer and audio specialist in Amsterdam who builds interactive web experiences, designs sound for digital products, and engineers full-stack applications.
+
+### What is VNGRD?
+VNGRD (pronounced "Vanguard") is an experimental browser-native media system for real-time audiovisual production. It runs entirely in the browser at vngrd.live.
+
+### What technologies does Andrea Merella work with?
+Andrea works with Web Audio API, WebGL, WebGPU, Three.js, GLSL shaders, Next.js, React, TypeScript, Supabase, Node.js, and various creative coding frameworks. He specializes in real-time audio processing and interactive visual experiences.
+
+### Where can I listen to Andrea Merella's music?
+Andrea's music is available on Spotify (search "Andrea Merella"), SoundCloud (soundcloud.com/andrea_merella), and Bandcamp (andreamerella.bandcamp.com).
+
+### How can I contact Andrea Merella?
+Visit https://andreamerella.com and use the contact form, or reach out via social media: Instagram (@andrea_dris), X/Twitter (@andrea_dris), or YouTube (@andreadris).
+
+### What is Du Fattur?
+Du Fattur is a full-stack freelance operating system available at dufattur.nl. It provides proforma invoicing, revenue analytics, PDF export, and a bilingual IT/EN interface for freelancers in the Netherlands.
+
+### What is Casa Nina Carignano?
+Casa Nina Carignano is a vacation rental apartment in Genova, Italy, with a direct-booking website at casaninacarignano.com. It features smart check-in via Vikey and maintains a 5.0 star Airbnb rating.
+
+## Entity Cross-References
+
+- Andrea Merella (Person): https://andreamerella.com/#person
+- Portfolio: https://andreamerella.com
+- VNGRD: https://vngrd.live
+- Du Fattur: https://dufattur.nl
+- Casa Nina: https://casaninacarignano.com
+
+## Social Profiles
+
+- Spotify: https://open.spotify.com/artist/0XPPJdH7cRPxVBSjXfi9iE
+- SoundCloud: https://soundcloud.com/andrea_merella
+- Bandcamp: https://andreamerella.bandcamp.com/
+- Instagram: https://www.instagram.com/andrea_dris/
+- X / Twitter: https://x.com/andrea_dris
+- YouTube: https://www.youtube.com/@andreadris
+- GitHub: https://github.com/AndreaMerella

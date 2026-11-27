@@ -1,0 +1,38 @@
+# Andrea Merella — Portfolio
+
+> Audio Specialist and Creative Developer based in Amsterdam, Netherlands.
+
+## About
+
+Andrea Merella is an audio specialist and creative developer who works at the intersection of sound design, web engineering, and interactive media. Based in Amsterdam, he builds high-voltage digital experiences that combine spatial audio, real-time visuals, and robust web architecture.
+
+## Core Capabilities
+
+- Sound Design & Spatial Audio (Web Audio API, 3D spatialization, dynamic mixing)
+- Creative Web Development (WebGL, WebGPU, real-time rendering, interactive installations)
+- Full-Stack Engineering (Next.js, React, Supabase, Vercel, GitHub Pages)
+- Music Production (available on Spotify, SoundCloud, Bandcamp)
+
+## Projects
+
+- **VNGRD//** — Experimental browser-native media system for real-time audiovisual production → https://vngrd.live
+- **SDROCER** — Interactive digital crate-digging experience → https://andreamerella.github.io/SDROCER/
+- **I Do Not Have Dreams, I Have Nightmares** — AI-powered nightmare journal PWA → https://i-do-not-have-dreams-ihave-nightmar.vercel.app/
+- **Casa Nina Carignano** — Direct-booking vacation rental site, multilingual → https://casaninacarignano.com
+- **Explorer** — Educational PWA mapping Amsterdam's urban soundscape → https://andreamerella.github.io/AmsterdamExplorer/
+- **Heavy Marine Utility** — Sustainable fashion and circular economy concept → https://andreamerella.github.io/Heavy-Marine-Utilities/
+- **Grifone Spotter** — Real-time geolocated fan tracker for Genoa CFC → https://andreamerella.github.io/grifone-spotter/
+- **Du Fattur** — Full-stack freelance invoicing OS → https://dufattur.nl
+- **DRIS_LAB** — Interactive audio-visual synthesis platform → https://andreamerella.github.io/DrisLab/
+- **MATTIE / WEB3** — Digital wearables and metaverse architecture
+
+## Canonical URLs
+
+- Portfolio: https://andreamerella.com
+- VNGRD: https://vngrd.live
+- Du Fattur: https://dufattur.nl
+- Casa Nina: https://casaninacarignano.com
+
+## Full Documentation
+
+For comprehensive context, see: https://andreamerella.com/llms-full.txt
